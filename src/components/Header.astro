@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+// import Menu from "./menu/Menu.astro";
+// import { Icon } from "astro-icon/components";
+---
+
+<header
+  class="max-w-[min(80rem,95vw)] backdrop-blur-xl bg-slate-200/30 flex flex-row-reverse sm:flex-row justify-between border border-slate-400/10 items-center py-3 my-5 rounded-full mx-auto px-10 md:px-20 fixed top-1 md:top-5 left-0 right-0 z-[101]"
+>
+  <div class="uppercase font-extrabold text-sm flex-1 text-end sm:text-start">
+    <button
+      class="uppercase font-extrabold text-sm cursor-pointer text-dark"
+      id="menu-button">ME-NU</button
+    >
+  </div>
+  <div class="flex-1 sm:flex sm:flex-col sm:place-items-center">
+    <a href="/">
+      <Image
+        src="/logo.svg"
+        alt="Paperware Factory Logo"
+        height={75}
+        width={100}
+        class="w-auto h-12 md:h-14"
+        loading={"eager"}
+        id="header-logo"
+      /></a
+    >
+  </div>
+  <div class="flex-1 hidden sm:inline">
+    <button
+      class="uppercase float-right font-extrabold text-sm cursor-pointer flex flex-row gap-2 items-center justify-center text-dark"
+      id="demo-button"
+    >
+      <!-- <Icon name={"tabler:cloud-download"} class={"text-2xl"} /> -->
+      <span>E-BROCHURE</span>
+    </button>
+  </div>
+</header>
+<!-- <Menu /> -->
+
+<script>
+  const toggleMenu = () => {
+    document.querySelector("#menu-bar")?.classList.toggle("translate-y-full");
+    document.querySelector("#menu-button")!.innerHTML =
+      document.querySelector("#menu-button")!.innerHTML === "CLOSE"
+        ? "ME-NU"
+        : "CLOSE";
+    document.querySelector("body")?.classList.toggle("overflow-y-hidden");
+  };
+
+  document.querySelector("#menu-button")?.addEventListener("click", toggleMenu);
+
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(0);
+
+  const headerTimeline = gsap.timeline({
+    scrollTrigger: "header",
+    repeatRefresh: false,
+  });
+
+  headerTimeline.from("header", {
+    duration: 0.5,
+    y: -100,
+    autoAlpha: 0,
+  });
+
+  headerTimeline.from("#header-logo", {
+    duration: 0.5,
+    y: 10,
+    autoAlpha: 0,
+  });
+
+  headerTimeline.from("#menu-button", {
+    duration: 0.5,
+    x: -100,
+    autoAlpha: 0,
+  });
+
+  headerTimeline.from(
+    "#demo-button",
+    {
+      duration: 0.5,
+      x: 100,
+      autoAlpha: 0,
+    },
+    "<"
+  );
+</script>

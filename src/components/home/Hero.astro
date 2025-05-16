@@ -1,0 +1,91 @@
+---
+// Hero section
+// import { Icon } from "astro-icon/components";
+---
+
+<hero-section>
+  <section
+    id="home-hero"
+    class="min-h-[70vh] md:min-h-[85vh] flex flex-col justify-center items-center relative"
+  >
+    <div
+      class="space-y-4 font-poppins lg:space-y-8 md:bg-paper p-4 md:p-24 rounded-4xl sm:rounded-full md:w-[90%] max-w-6xl mb-40"
+      id="hero-paper"
+    >
+      <h1
+        class="text-3xl sm:text-4xl lg:text-6xl text-center font-black text-dark"
+        id="hero-title"
+      >
+        It's Not Just A Cup<br />It's Paper Cup
+      </h1>
+      <p
+        class="font-semibold text-center text-wrap lg:text-lg text-sm max-w-2xl mx-auto mt-4 text-contrast"
+        id="hero-description"
+      >
+        Sip smart, stay safe! Our lightweight and disposable paper cups ensure
+        hygiene, convenience, and sustainability in every drink.
+      </p>
+    </div>
+    <div
+      class="absolute bottom-5 md:bottom-10 left-0 right-0 flex justify-center"
+    >
+      <button
+        class="bg-dark text-white py-4 px-10 rounded-full cursor-pointer flex flex-row gap-4 items-center justify-center z-40"
+        id="hero-download-brochure"
+      >
+        <!-- <Icon name={"tabler:cloud-download"} class={"text-2xl"} /> -->
+        <span class="font-black">E-BROCHURE</span>
+      </button>
+    </div>
+  </section>
+</hero-section>
+
+<!-- <script>
+  import { gsap } from "gsap";
+  import SplitType from "split-type";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(0);
+
+  const heroTimeline = gsap.timeline({
+    delay: 1,
+    scrollTrigger: "#hero-paper",
+  });
+  heroTimeline.from(document.querySelector("#hero-paper"), {
+    duration: 0.8,
+    scale: 0,
+    marginBottom: 0,
+    autoAlpha: 0,
+  });
+  const heroTitle = new SplitType("#hero-title", { types: "words" });
+  heroTimeline.from(heroTitle.words, {
+    duration: 0.7,
+    y: 20,
+    autoAlpha: 0,
+    stagger: 0.15,
+  });
+
+  const heroDescription = new SplitType("#hero-description", {
+    types: "words",
+  });
+  heroTimeline.from(heroDescription.words, {
+    duration: 1,
+    x: 20,
+    autoAlpha: 0,
+    stagger: 0.1,
+  });
+
+  heroTimeline.from(document.getElementById("hero-cup"), {
+    duration: 0.7,
+    y: 200,
+    autoAlpha: 0,
+  });
+
+  heroTimeline.from("#hero-download-brochure", {
+    duration: 0.5,
+    y: 100,
+    autoAlpha: 0,
+  });
+  console.log(document.getElementById("hero-cup"));
+</script> -->

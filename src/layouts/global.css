@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "./fonts.css";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --color-bg: #f9f9f9;
+  --color-paper: #ffd753;
+  --color-dark: #231f20;
+  --color-contrast: #92703a;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --gradiant-card: linear-gradient(180deg, #ffd753 0%, #ffd753 100%);
+}
+
+html,
+body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}

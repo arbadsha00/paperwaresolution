@@ -1,0 +1,189 @@
+---
+// import Cup_1 from "./cup/Cup_1";
+// import Cup_2 from "./cup/Cup_2";
+// import Cup_3 from "./cup/Cup_3";
+// // Single Item
+import CupWrapper from "./cup/CupWrapper";
+var { name = "", key } = Astro.props;
+// const cups = [Cup_1, Cup_2, Cup_3];
+// const CupComponent = cups[key % cups.length];
+interface Props {
+  name?: string;
+  key: number;
+}
+---
+
+<single-item
+  id={`featured-product-${key}`}
+  data-key={key}
+  data-name={name}
+  class={`product-card flex-1 p-3 relative`}
+>
+  {
+    key !== 0 ? (
+      <div
+        class="w-1 rounded h-2/3 bg-slate-400/30 absolute left-0 bottom-3 hidden lg:inline"
+        data-aos="fade-up"
+        data-aosdelay={0.7}
+      />
+    ) : (
+      <div />
+    )
+  }
+  <CupWrapper client:only="react" keyIndex={key} />
+  <!-- <Cup_1 client:only="react" /> -->
+  <!-- <CupComponent client:only="react" /> -->
+  <!-- <Product featuredCupId={`featured-product-${key + 1}`} /> -->
+  <div
+    class="z-0 relative h-auto w-full max-w-[300px] mt-3 mx-auto flex flex-col items-center justify-end"
+  >
+    <div
+      class="content relative z-10 flex flex-col items-center gap-2 justify-center py-10"
+    >
+      <!-- <button
+        class="bg-dark text-xs text-amber-500 mb-8 py-3 px-6 rounded-full cursor-pointer flex flex-row gap-3 items-center justify-center uppercase"
+      >
+        <Icon name={"tabler:shopping-cart"} class={"text-2xl"} />
+        <span class="font-black">Ask for a quotation</span>
+      </button> -->
+    </div>
+    <svg
+      class="absolute z-5"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      data-aos="fade-up"
+    >
+      <defs>
+        <radialGradient
+          id={`sw-gradient-${key}`}
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(88.365 79.7025) rotate(11.4468) scale(130.61 507.365)"
+        >
+          <stop stop-color="#F5CA01"></stop>
+          <stop stop-color="#FEAE00" offset="1"></stop>
+        </radialGradient>
+      </defs>
+      <path
+        id={`blob-path-${key}`}
+        fill={`url(#sw-gradient-${key})`}
+        d="M20.3,-24.3C26,-19.4,30,-12.7,32.1,-5C34.2,2.6,34.3,11.2,31.1,19C27.8,26.7,21.3,33.5,13.4,36.2C5.4,38.8,-3.8,37.3,-10.6,33.1C-17.5,28.9,-21.9,22.1,-27,14.8C-32.1,7.6,-37.9,-0.1,-37.3,-7.1C-36.7,-14.1,-29.7,-20.6,-22.4,-25.2C-15.1,-29.9,-7.6,-32.8,-0.1,-32.6C7.3,-32.5,14.6,-29.3,20.3,-24.3Z"
+        width="100%"
+        height="100%"
+        transform="translate(50 50)"
+        style="transition: 0.3s;"
+        stroke-width="0"></path>
+    </svg>
+  </div>
+  <p
+    class="font-extrabold text-xl text-center z-0"
+    data-aos="fade-up"
+    data-aosdelay={1.3}
+    data-aosstart="top bottom"
+  >
+    {name}
+  </p>
+  <p
+    class="font-bold text-xs opacity-50 text-center mt-2 z-0"
+    data-aos="fade-up"
+    data-aosdelay={1.5}
+    data-aosstart="top bottom"
+  >
+    250 ML | 350 ML | 08 OG | 12 OG
+  </p>
+</single-item>
+
+<script
+  is:inline
+  define:vars={{
+    key,
+    name,
+  }}
+>
+  const svg_path_d_list = [
+    "M20.3,-24.3C26,-19.4,30,-12.7,32.1,-5C34.2,2.6,34.3,11.2,31.1,19C27.8,26.7,21.3,33.5,13.4,36.2C5.4,38.8,-3.8,37.3,-10.6,33.1C-17.5,28.9,-21.9,22.1,-27,14.8C-32.1,7.6,-37.9,-0.1,-37.3,-7.1C-36.7,-14.1,-29.7,-20.6,-22.4,-25.2C-15.1,-29.9,-7.6,-32.8,-0.1,-32.6C7.3,-32.5,14.6,-29.3,20.3,-24.3Z",
+    "M28.8,-31.6C36.8,-27.6,42.4,-18,43.6,-8.2C44.7,1.7,41.4,11.9,35.6,19.2C29.7,26.5,21.3,30.9,12.3,34.4C3.4,37.8,-6.1,40.3,-15.4,38.6C-24.7,36.8,-33.9,30.8,-36.5,22.8C-39.2,14.7,-35.3,4.6,-31.9,-4C-28.5,-12.7,-25.6,-19.8,-20.3,-24.3C-15.1,-28.9,-7.5,-30.8,1.4,-32.5C10.4,-34.2,20.8,-35.7,28.8,-31.6Z",
+    "M20.3,-25.4C25.2,-20,27.5,-12.6,29.3,-4.8C31.1,3,32.5,11.3,29.4,17.3C26.3,23.4,18.8,27.3,10.8,30.6C2.8,33.8,-5.7,36.4,-13.1,34.4C-20.5,32.4,-26.8,25.7,-32.2,17.8C-37.7,9.9,-42.3,0.8,-41,-7.3C-39.7,-15.5,-32.4,-22.7,-24.5,-27.6C-16.7,-32.5,-8.4,-35.1,-0.3,-34.7C7.7,-34.3,15.3,-30.8,20.3,-25.4Z",
+    "M24.4,-30.1C31.2,-23.3,36,-15.3,37.4,-6.7C38.8,1.9,36.9,11,32,17.6C27.2,24.2,19.5,28.3,11.8,30C4.2,31.6,-3.4,30.9,-11.4,29C-19.4,27.1,-27.9,24.1,-32.1,18C-36.4,11.8,-36.4,2.7,-33.6,-4.7C-30.8,-12,-25.1,-17.6,-19.1,-24.5C-13,-31.4,-6.5,-39.7,1.1,-41C8.8,-42.4,17.5,-36.9,24.4,-30.1Z",
+  ];
+
+  // Blob animation logic
+  const blobPath = document.getElementById(`blob-path-${key}`);
+  let currentPath = 0;
+  var pauseAnimateBlob = false;
+
+  function getRandomPath(currentIndex, pathArray) {
+    const availableIndices = pathArray
+      .map((_, i) => i)
+      .filter((i) => i !== currentIndex);
+
+    return availableIndices.length > 0
+      ? availableIndices[Math.floor(Math.random() * availableIndices.length)]
+      : 0;
+  }
+
+  function animateBlob() {
+    if (pauseAnimateBlob) return;
+    const nextPath = getRandomPath(currentPath, svg_path_d_list);
+
+    gsap.to(blobPath, {
+      attr: { d: svg_path_d_list[nextPath], transform: "translate(50 50)" },
+      duration: 1 + Math.random() * 0.5, // Add some variability
+      ease: "none",
+      overwrite: true,
+      onComplete: () => {
+        currentPath = nextPath;
+        animateBlob();
+      },
+    });
+  }
+
+  // const morphTheSVG = {
+  //   enter: function () {
+  //     pauseAnimateBlob = true;
+  //     //   console.log("enter", pauseAnimateBlob);
+  //     const shape = document.getElementById(`blob-path-${key}`);
+  //     const svg_path_d =
+  //       "M10,0 L90,0 Q100,0 100,10 L100,90 Q100,100 90,100 L10,100 Q0,100 0,90 L0,10 Q0,0 10,0 Z";
+
+  //     gsap.to(shape, {
+  //       attr: {
+  //         d: svg_path_d,
+  //         transform: "translate(0 0)",
+  //         // fill: "#333",
+  //       },
+  //       duration: 0.4,
+  //       overwrite: true,
+  //       ease: "elastic.out(1, 0.3)",
+  //     });
+  //   },
+  //   leave: function () {
+  //     pauseAnimateBlob = false;
+  //     const nextPath = getRandomPath(currentPath, svg_path_d_list);
+  //     const shape = document.getElementById(`blob-path-${key}`);
+
+  //     gsap.to(shape, {
+  //       attr: {
+  //         d: svg_path_d_list[nextPath],
+  //         transform: "translate(50 50)",
+  //         // fill: `url(#sw-gradient-${key})`,
+  //       },
+  //       duration: 0.4,
+  //       overwrite: true,
+  //       ease: "elastic.in(1, 0.3)",
+  //     });
+
+  //     animateBlob();
+  //   },
+  // };
+
+  // Start animation when component mounts
+  if (blobPath) {
+    document.addEventListener("DOMContentLoaded", animateBlob);
+    // const featuredProduct = document.getElementById(`featured-product-${key}`);
+    // featuredProduct.addEventListener("mouseenter", morphTheSVG.enter);
+    // featuredProduct.addEventListener("mouseleave", morphTheSVG.leave);
+  }
+</script>

@@ -1,0 +1,27 @@
+---
+// Featured Products
+import Products from "./products.astro";
+// import Link from "../../Link.astro";
+---
+
+<featured-products>
+  <section class="space-y-8 w-full max-w-6xl mx-auto py-20 px-8">
+    <h2
+      class="text-4xl lg:text-6xl text-center font-black text-dark mb-20"
+      data-aos="fade-up"
+    >
+      Featured Products
+    </h2>
+
+    <Products />
+
+    <div
+      class="mt-20 flex flex-row items-center justify-center"
+      data-aos="fade-up"
+      data-aosstart="top bottom"
+    >
+      <!-- Discover More Link -->
+      <!-- <Link id="discover-more" href="featured-products"> Discover More </Link> -->
+    </div>
+  </section>
+</featured-products>

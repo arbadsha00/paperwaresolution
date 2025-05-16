@@ -1,0 +1,20 @@
+---
+import Item from "./item.astro";
+
+const products = [
+  {
+    name: "Normal Papercup",
+  },
+  {
+    name: "Ripple Wall Papercup",
+  },
+  {
+    name: "Double Wall Papercup",
+  },
+];
+---
+
+<products-list class="flex flex-col lg:flex-row w-full justify-evenly">
+  {products?.map((product, index) => <Item name={product.name} key={index} />)}
+  <!-- <Cup_1 client:only="react" /> -->
+</products-list>

@@ -1,26 +1,193 @@
 ---
- import './src/styles/global.css';
+import "./global.css";
+import Header from "../components/Header.astro";
+import { Image } from "astro:assets";
+import ViewCanvas from "../components/ViewCanvas";
+// import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>
+      Paperware Solution - Printing & Packaging Partner For Your Business
+    </title>
+    <!-- <ClientRouter fallback="none" /> -->
+  </head>
+
+  <body
+    class="relative overflow-x-hidden overflow-y-auto scroll-smooth max-w-svw min-h-svh !pt-36"
+  >
+    <Header />
+    <Image
+      src={"/bg-fluid.jpg"}
+      height={200}
+      width={300}
+      alt=""
+      class="mix-blend-multiply select-none fixed -z-[200] top-0 left-0 w-full h-[120vh] lg:h-full max-w-svw min-h-svh"
+    />
+    <div
+      id={"bg-attachment"}
+      class="select-none fixed -z-[201] top-0 left-0 w-full h-[120vh] lg:h-full max-w-svw min-h-svh"
+    >
+    </div>
+    <ViewCanvas    client:only="react" />
+    <slot />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<script>
+  // Making gsap global
+  import { gsap } from "gsap";
+  import Lenis from "lenis";
+
+  // Change Background
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Initialize Lenis
+  const lenis = new Lenis({
+    syncTouch: true,
+    lerp: 0.05, // Lower values create a smoother scroll effect
+    smoothWheel: true, // Enables smooth scrolling for mouse wheel events
+  });
+
+  // Use requestAnimationFrame to continuously update the scroll
+  function raf(time: any) {
+    lenis.raf(time);
+    ScrollTrigger.update();
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+  lenis.on("scroll", ScrollTrigger.update);
+
+  // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+  // This ensures Lenis's smooth scroll animation updates on each GSAP tick
+  // gsap.ticker.add((time) => {
+  //   lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+  // });
+
+  // Disable lag smoothing in GSAP to prevent any delay in scroll animations
+  gsap.ticker.lagSmoothing(0);
+
+  window.gsap = gsap;
+
+  const init = () => {
+    const bg_element = "#bg-attachment";
+
+    const purewhitebg =
+      "radial-gradient(278.83% 61.5% at 38.48% 42.44%, #fff 0%, #fff 100%)";
+    const whitebg =
+      "radial-gradient(278.83% 61.5% at 38.48% 42.44%, #fff 0%, #ddd 100%)";
+    const radialbg =
+      "radial-gradient(278.83% 61.5% at 38.48% 42.44%, #F5CA01 0%, #FEAE00 100%)";
+    const radialbg2 =
+      "linear-gradient(318deg, #DCFFBA -22.13%, #81DD4C 94.19%)";
+    const greenbg =
+      "radial-gradient(278.83% 61.5% at 38.48% 42.44%, #ADD686 0%, #467E26 100%)";
+    const greenbg2 =
+      "radial-gradient(278.83% 61.5% at 38.48% 42.44%, #DCFFBA 22%,  #81DD4C 100%)";
+    // Set initial background
+    gsap.set(bg_element, { background: purewhitebg });
+
+    const elementIdsForRadial = [
+      // Home Page
+      ["#home-hero", radialbg],
+      ["#home-eco", radialbg, radialbg],
+      ["#noPlastic", radialbg, radialbg],
+      ["#why-choose-paperware", whitebg],
+      // Company Page
+      ["#company-hero", whitebg],
+      ["#company-ecology", greenbg2],
+      // Featured Products
+      ["#featured-products-hero", radialbg],
+      ["#contact-faq", radialbg],
+      ["#green-hero", greenbg2],
+      ["#green-cup-story", greenbg],
+    ];
+
+    elementIdsForRadial.forEach(([id, bg, endbg]) => {
+      try {
+        if (document.querySelector(id))
+          ScrollTrigger.create({
+            trigger: id, // Target the element with id
+            start: "top center", // When the top of the element hits the center of the viewport
+            end: "bottom center", // When the bottom of the element leaves the center of the viewport
+            // markers: true,
+            onEnter: () => {
+              gsap.to(bg_element, {
+                background: bg || radialbg,
+                duration: 1,
+                ease: "power2.inOut",
+              });
+            },
+            onLeave: () => {
+              gsap.to(bg_element, {
+                background: endbg || whitebg,
+                duration: 1,
+                ease: "power2.inOut",
+              });
+            },
+            onEnterBack: () => {
+              gsap.to(bg_element, {
+                background: bg || radialbg,
+                duration: 1,
+                ease: "power2.inOut",
+              });
+            },
+            onLeaveBack: () => {
+              gsap.to(bg_element, {
+                background: whitebg,
+                duration: 1,
+                ease: "power2.inOut",
+              });
+            },
+          });
+      } catch {}
+    });
+
+    // const aosTimeline = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: "body",
+    //     start: "top bottom",
+    //     toggleActions: "play none none reverse",
+    //     markers: true,
+    //   },
+    // });
+
+    const dataAOSs = gsap.utils.toArray<HTMLElement>("[data-aos]");
+
+    dataAOSs.forEach((element) => {
+      const direction = element.dataset.aos; // simpler way to access data attribute
+      const start = element.dataset.aosstart;
+      const y = 100;
+      const delay = element.dataset.aosdelay ?? 0;
+
+      gsap.from(element, {
+        opacity: 0,
+        y: direction === "fade-up" ? y : direction === "fade-down" ? -y : 0,
+        x: direction === "fade-left" ? y : direction === "fade-right" ? -y : 0,
+        alpha: 0,
+        duration: 0.7,
+        delay,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: element, // trigger on the element itself
+          start: start || "top 70%", // when top of element hits 70% of viewport
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+  };
+
+  init();
+  document.addEventListener("astro:page-load", init);
+</script>

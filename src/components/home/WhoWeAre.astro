@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+// import { Icon } from "astro-icon/components";
+
+// Who we are - section
+---
+
+<who-we-are>
+  <section
+    id="company"
+    class="py-24 px-8 min-h-screen flex flex-col justify-center"
+  >
+    <div class="space-y-8 w-full max-w-6xl mx-auto py-40">
+      <h2
+        class="text-xl md:text-3xl text-left font-bold text-dark/50"
+        id="who-we-are-title"
+      >
+        Who we are?
+      </h2>
+      <p
+        class="text-left text-2xl md:text-4xl leading-loose mx-auto text-dark font-bold"
+        id="who-we-are-description"
+      >
+        Welcome to our modern manufacturing <Image
+          src={"/manufacturing.png"}
+          alt={"manufacturing cup"}
+          height={200}
+          width={200}
+          class={"md:w-48 md:h-16 w-32 h-10 rounded-full inline object-cover object-center my-2"}
+        />
+        facility, where we produce high-quality paper cups and packaging solutions
+        with a focus on durability, hygiene, and custom branding. Designed for businesses
+        that value quality and sustainability.
+      </p>
+      <div class="mt-20">
+        <a
+          href="/company"
+          id="who-we-are-company-link"
+          class="tracking-wider text-left uppercase text-sm relative text-primary font-black [&>#underbg]:bg-paper [&:hover>#underbg]:bg-dark/20 px-2"
+        >
+          <span class="z-0">Learn more about us</span>
+          <!-- <Icon name="lsicon:open-new-outline" class={"text-2xl inline z-0"} /> -->
+          <div id="underbg" class="absolute bottom-[-10%] w-full h-2/3 -z-10">
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</who-we-are>
+
+<script>
+  import { gsap } from "gsap";
+  import SplitType from "split-type";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(0);
+
+  const whoWeAreTimeline = gsap.timeline({
+    delay: 0.5,
+    scrollTrigger: "#who-we-are-title",
+  });
+
+  whoWeAreTimeline.from("#who-we-are-title", {
+    duration: 0.8,
+    y: 20,
+    autoAlpha: 0,
+  });
+
+  whoWeAreTimeline.from("#who-we-are-company-link", {
+    duration: 0.5,
+    y: 20,
+    autoAlpha: 0,
+  });
+
+  const description = new SplitType("#who-we-are-description", {
+    types: "words",
+  });
+
+  whoWeAreTimeline.from(description.words, {
+    opacity: 0.2,
+    stagger: 0.2,
+  });
+
+  whoWeAreTimeline.from(
+    "#who-we-are-company-link #underbg",
+    {
+      duration: 1,
+      width: 0,
+      autoAlpha: 0,
+    },
+    "<"
+  );
+</script>
