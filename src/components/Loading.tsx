@@ -1,17 +1,39 @@
-// src/components/ui/SimpleLoader.tsx
 "use client";
 
 import { useProgress } from "@react-three/drei";
+import { useEffect, useState } from "react";
 
 export default function Loading() {
   const { progress } = useProgress();
+ const [isDone, setIsDone] = useState(false);
+
+  useEffect(() => {
+    // Only mark as done when progress hits 100%
+    if (progress >= 100 && !isDone) {
+      setIsDone(true);
+
+      // Hide external loader
+      const preLoadingDiv = document.getElementById("pre-loading");
+      if (preLoadingDiv) {
+        preLoadingDiv.classList.add("hidden");
+        preLoadingDiv.classList.remove("flex");
+      }
+    }
+  }, [progress, isDone]);
+
+  if (isDone) return null;
+console.log(progress);
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center">
-      <div className="relative w-12 h-12">
-        <div className="absolute inset-0 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-        <span className="absolute inset-0 grid place-items-center text-xs font-bold text-white">
-          {Math.round(progress)}%
-        </span>
+    <div
+      className={`fixed inset-0 z-[200] items-center justify-center bg-[#EBAC00] ${
+        progress < 100 ? "flex" : "hidden"
+      }`}
+    >
+      <div className="w-46">
+        <div
+          className="h-2 bg-black transition-all duration-300"
+          style={{ width: `${progress}%` }}
+        />
       </div>
     </div>
   );

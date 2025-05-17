@@ -21,7 +21,11 @@ import ViewCanvas from "../components/ViewCanvas";
 
   <body
     class="relative overflow-x-hidden overflow-y-auto scroll-smooth max-w-svw min-h-svh !pt-36"
-  >
+    >
+    <div id="pre-loading" class="fixed inset-0 z-[190] flex items-center justify-center bg-[#EBAC00]">
+
+</div>
+    <ViewCanvas client:only="react" />
     <Header />
     <Image
       src={"/bg-fluid.jpg"}
@@ -35,7 +39,7 @@ import ViewCanvas from "../components/ViewCanvas";
       class="select-none fixed -z-[201] top-0 left-0 w-full h-[120vh] lg:h-full max-w-svw min-h-svh"
     >
     </div>
-    <ViewCanvas    client:only="react" />
+
     <slot />
   </body>
 </html>

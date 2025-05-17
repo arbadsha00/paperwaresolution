@@ -3,6 +3,7 @@ import { Environment, View } from "@react-three/drei";
 import { Suspense } from "react";
 import { PaperCup } from "./home/PaperCup";
 import { Loader } from "@react-three/drei";
+import Loading from "./Loading";
 
 export default function ViewCanvas() {
   return (
@@ -22,8 +23,8 @@ export default function ViewCanvas() {
           <View.Port />
         </Suspense>
       </Canvas>
-
-      <Loader
+<Loading/>
+      {/* <Loader
         containerStyles={{
           position: "fixed",
           top: 0,
@@ -46,7 +47,7 @@ export default function ViewCanvas() {
         dataStyles={{
           display: "none",
         }}
-      />
+      /> */}
     </>
   );
 }
