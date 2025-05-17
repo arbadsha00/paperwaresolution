@@ -24,8 +24,16 @@ import ViewCanvas from "../components/ViewCanvas";
   >
     <div
       id="pre-loading"
-      class="fixed inset-0 z-[190] flex items-center justify-center bg-[#EBAC00]"
+      class="fixed inset-0 z-[190] flex flex-col items-center justify-center bg-[#EBAC00]"
     >
+      <p class="mb-8">Loading...</p>
+      <!-- <div class="w-46">
+        <div
+          class="h-2 bg-black transition-all duration-300"
+          style={{ width: `5%` }}
+        >
+        </div>
+      </div> -->
     </div>
     <ViewCanvas client:only="react" />
     <Header />
