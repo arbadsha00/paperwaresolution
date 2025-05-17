@@ -33,11 +33,11 @@ export default function ViewCanvas() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#FFD753",
-          zIndex: 100,
+          background: "#EBAC00",
+          zIndex: 200,
         }}
         innerStyles={{
-          background: "#FFD753",
+          background: "#EBAC00",
         }}
         barStyles={{
           height: "8px",
