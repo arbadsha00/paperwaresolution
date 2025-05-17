@@ -1,0 +1,212 @@
+---
+import { Icon } from "astro-icon/components";
+import Ball from "./ball.astro";
+---
+
+<why-choose-paperware>
+  <section
+    id="why-choose-paperware"
+    class="w-[90%] max-w-6xl mx-auto mt-32 mb-64 min-h-screen flex flex-col items-center justify-center"
+  >
+    <h1
+      class="text-4xl md:text-6xl font-poppins uppercase text-center font-black items-center will-change-transform text-dark"
+      data-aos="fade-up"
+    >
+      Why<br />Choose<br />Paperware?
+    </h1>
+
+    <div
+      id="why-choose-paperware-cards-container"
+      class="md:flex md:flex-row items-center justify-center gap-2 mt-28 grid grid-cols-2 w-full"
+    >
+      <div
+        id="why-choose-paperware-card-1"
+        class="translate-y-[-30px] flex flex-col items-center justify-center card-why-choose px-6 py-20 lg:px-10 md:py-28 rounded-full flex-1/4"
+      >
+        <Icon
+          name={"solar:delivery-bold-duotone"}
+          class={"text-6xl md:text-8xl text-dark"}
+        />
+        <p
+          class="text-base mt-3 md:mt-3 lg:text-lg font-bold font-poppins text-center"
+        >
+          Next Day<br /> Delivery
+        </p>
+      </div>
+      <div class="mt-30 ball-why-choose hidden md:inline">
+        <Ball />
+      </div>
+
+      <div
+        class="translate-y-[30px] flex flex-col items-center justify-center card-why-choose px-6 py-20 lg:px-10 md:py-28 rounded-full flex-1/4"
+      >
+        <Icon
+          name={"ph:package-duotone"}
+          class={"text-6xl md:text-8xl text-dark"}
+        />
+        <p
+          class="text-base mt-3 md:mt-3 lg:text-lg font-bold font-poppins text-center"
+        >
+          Packaging<br /> On Demand
+        </p>
+      </div>
+
+      <div class="mb-30 ball-why-choose hidden md:inline">
+        <Ball />
+      </div>
+
+      <div
+        class="translate-y-[-30px] flex flex-col items-center justify-center card-why-choose px-6 py-20 lg:px-10 md:py-28 rounded-full flex-1/4"
+      >
+        <Icon
+          name={"pepicons-print:paper-plane"}
+          class={"text-6xl md:text-8xl text-dark"}
+        />
+        <p
+          class="text-base mt-3 md:mt-3 lg:text-lg font-bold font-poppins text-center"
+        >
+          World-wide<br /> Shipping
+        </p>
+      </div>
+      <div class="mt-30 ball-why-choose hidden md:inline">
+        <Ball />
+      </div>
+
+      <div
+        class="translate-y-[30px] flex flex-col items-center justify-center card-why-choose px-6 py-20 lg:px-10 md:py-28 rounded-full flex-1/4"
+      >
+        <Icon
+          name={"solar:shield-check-outline"}
+          class={"text-6xl md:text-8xl text-dark"}
+        />
+        <p
+          class="text-base mt-3 md:mt-3 lg:text-lg font-bold font-poppins text-center"
+        >
+          Quality<br /> Manufacturing
+        </p>
+      </div>
+    </div>
+  </section>
+</why-choose-paperware>
+
+<style>
+  .card-why-choose {
+    border: 1px solid rgba(190, 190, 190, 0.322);
+    background: rgba(190, 190, 190, 0.151);
+    box-shadow: 10px 8px 23.3px 0px rgba(234, 234, 234, 0.13) inset;
+    backdrop-filter: blur(7.099999904632568px);
+    will-change: transform;
+  }
+  .ball-why-choose {
+    transform: scale(0.6);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(0);
+  // Helper function - returns base value ± variation
+  const similarRandom = (base: number, variation: number) =>
+    base + (Math.random() * variation * 2 - variation);
+
+  // Define type for our card animation parameters
+  type CardAnimationParams = {
+    y: number;
+    scale: number;
+    rotationY: number;
+    duration: number;
+    delay: number;
+    floatDistance: number;
+    floatDuration: number;
+  };
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "why-choose-paperware",
+      start: "top 60%",
+      toggleActions: "play none none reset",
+      // markers: true,
+    },
+  });
+
+  const cards = gsap.utils.toArray<HTMLElement>(".card-why-choose");
+
+  cards.forEach((card: HTMLElement, index: number) => {
+    const params: CardAnimationParams = {
+      y: similarRandom(200, 20),
+      scale: similarRandom(0.95, 0.03),
+      rotationY: similarRandom(180, 30) * (index % 2 ? -1 : 1),
+      duration: similarRandom(3, 0.3),
+      delay: index * similarRandom(0.2, 0.05),
+      floatDistance: similarRandom(20, 5),
+      floatDuration: similarRandom(2, 0.5),
+    };
+
+    // card entry animation
+    tl.from(
+      card,
+      {
+        y: params.y,
+        opacity: 0,
+        scale: params.scale,
+        rotationY: params.rotationY,
+        duration: params.duration,
+        ease: "power3.out",
+      },
+      index * 0.4
+    );
+
+    // Card Floating animation
+    tl.to(
+      card,
+      {
+        y: `+=${params.floatDistance * (index % 2 ? -1 : 1)}`,
+        duration: params.floatDuration,
+        repeat: -1,
+        yoyo: true,
+        ease: "Power1.easeInOut",
+      },
+      ">"
+    );
+  });
+
+  const balls = gsap.utils.toArray<HTMLElement>(".ball-why-choose");
+
+  balls.forEach((ball: HTMLElement, index: number) => {
+    const ballParams = {
+      floatDistance: similarRandom(30, 10),
+      floatDuration: similarRandom(3, 1),
+      rotation: similarRandom(20, 10),
+    };
+
+    // Ball entry animation
+    tl.from(
+      ball,
+      {
+        y: similarRandom(100, 50) * (index % 2 ? -1 : 1),
+        delay: 1.2,
+        opacity: 0,
+        scale: similarRandom(0.4, 0.2),
+        duration: similarRandom(3.5, 0.5),
+        ease: "power2.out",
+      },
+      index * 0.5
+    );
+
+    // Ball floating animation
+    tl.to(
+      ball,
+      {
+        y: `+=${ballParams.floatDistance}`,
+        rotation: ballParams.rotation,
+        duration: ballParams.floatDuration,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      },
+      ">"
+    );
+  });
+</script>

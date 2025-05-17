@@ -1,0 +1,694 @@
+---
+import SayNoToPlastic from "./SayNoToPlastic/main.astro";
+import PlasticSavingCalculator from "./PlasticSavingCalculator/main.astro";
+import PaperSavingCalculator from "./PaperSavingCalculator/main.astro";
+import InteractiveBg from "./SayNoToPlastic/interactive-bg.astro";
+---
+
+<section
+  id="home-eco"
+  class="relative h-fit max-h-svh md:max-h-none min-h-screen font-poppins flex flex-col justify-center items-center mb-80"
+>
+  <InteractiveBg />
+  <div id="step-1">
+    <SayNoToPlastic />
+  </div>
+  <div id="step-2">
+    <PlasticSavingCalculator />
+  </div>
+  <div id="step-3">
+    <PaperSavingCalculator />
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(0);
+
+  ScrollTrigger.saveStyles(
+    "#pslsc-0 .title, #pslsc-0 .subtitle, #pslsc-1 .title, #pslsc-1 .subtitle, #pslsc-2 .title, #pslsc-2 .subtitle"
+  );
+
+  const flatbg = "linear-gradient(180deg, #FFD753 0%, #FFD753 100%)";
+  const radialbg = "linear-gradient(180deg, #F5CA01 0%, #FEAE00 100%)";
+  const capsule = "#eco-capsule-bg";
+
+  // Animation timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#home-eco",
+      start: "top top",
+      end: "+=7000px", // Increased scroll distance
+      scrub: true, // Smoother scrubbing
+      pin: true,
+      toggleActions: "play none none reverse",
+      anticipatePin: 2,
+      // markers: true,
+      // invalidateOnRefresh: true,
+      // Disable these if causing issues
+      // onEnter: () => document.body.classList.add('no-scroll'),
+      // onLeave: () => document.body.classList.remove('no-scroll')
+    },
+  });
+
+  gsap.to(capsule, {
+    background: flatbg,
+    ease: "power2.out",
+  });
+
+  ScrollTrigger.matchMedia({
+    "(min-width: 768px)": function () {
+      tl.to(
+        capsule,
+        {
+          height: "150px",
+          width: "90%",
+          duration: 0.7,
+          ease: "power2.inOut",
+        },
+        "<1"
+      ).to(
+        capsule,
+        {
+          height: "100%",
+          width: "270px",
+          duration: 0.7,
+          ease: "power2.inOut",
+        },
+        "<3"
+      );
+    },
+    "(max-width: 767px)": function () {
+      tl.to(
+        capsule,
+        {
+          height: "70px",
+          width: "90%",
+          duration: 0.7,
+          ease: "power2.inOut",
+        },
+        "<1"
+      ).to(
+        capsule,
+        {
+          height: "100%",
+          width: "150px",
+          duration: 0.7,
+          ease: "power2.inOut",
+        },
+        "<3"
+      );
+    },
+    all: function () {
+      tl.fromTo(
+        "#no-plastic-initial-content",
+        {
+          scale: 1,
+          y: 0,
+          ease: "power2.out",
+        },
+        {
+          scale: 0.8,
+          y: -10,
+          ease: "power2.out",
+        }
+      )
+        .to(
+          "#no-plastic-additional-content",
+          {
+            opacity: 1,
+            display: "inline",
+            y: -10,
+            ease: "power2.out",
+          },
+          "<1"
+        )
+        .to(
+          "#no-plastic-initial-content",
+          {
+            opacity: 0,
+            display: "none",
+            y: -10,
+            ease: "power2.out",
+          },
+          "<2"
+        )
+        .to(
+          "#no-plastic-additional-content",
+          {
+            opacity: 0,
+            display: "none",
+            y: -10,
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#noPlastic",
+          {
+            opacity: 0,
+            display: "none",
+            y: -10,
+            ease: "power2.out",
+          },
+          "<0.7"
+        )
+        .to(
+          "#PlasticSavingCalculator",
+          {
+            opacity: 1,
+            display: "flex",
+            y: -10,
+            ease: "power2.out",
+          },
+          "<0.2"
+        )
+        .to(
+          "#plastic-saving-initial-content",
+          {
+            opacity: 1,
+            display: "inline",
+            y: -40,
+            ease: "power2.out",
+          },
+          "<0.7"
+        )
+
+        .to(
+          "#plastic-saving-additional-content",
+          {
+            opacity: 1,
+            y: 30,
+            ease: "power2.out",
+          },
+          "<0.7"
+        )
+        .to(
+          "#ps-rs-0",
+          {
+            innerText: 3500,
+            snap: {
+              innerText: 1,
+            },
+            ease: "power2.out",
+            // modifiers: {
+            //   innerText: function (value) {
+            //     return new Intl.NumberFormat().format(Math.floor(value)) || 0;
+            //   },
+            // },
+          },
+          "<"
+        )
+        .to(
+          "#ps-rs-1",
+          {
+            innerText: 825,
+            snap: {
+              innerText: 1,
+            },
+            ease: "power2.out",
+            // modifiers: {
+            //   innerText: function (value) {
+            //     return new Intl.NumberFormat().format(Math.floor(value)) || 0;
+            //   },
+            // },
+          },
+          "<"
+        )
+        .to(
+          "#ps-rs-2",
+          {
+            innerText: 4325,
+            snap: {
+              innerText: 1,
+            },
+            ease: "power2.out",
+            // modifiers: {
+            //   innerText: function (value) {
+            //     return new Intl.NumberFormat().format(Math.floor(value)) || 0;
+            //   },
+            // },
+          },
+          "<"
+        );
+    },
+  });
+
+  ScrollTrigger.matchMedia({
+    "(min-width: 768px)": function () {
+      tl.fromTo(
+        // Decrease Size 1
+        "#pslsc-0 .title",
+        {
+          fontSize: "6rem",
+          color: "#231f20",
+          ease: "power2.out",
+        },
+        {
+          fontSize: "3rem",
+          color: "#C7A534",
+          ease: "power2.out",
+        },
+        "<2"
+      ).fromTo(
+        "#pslsc-0 .subtitle",
+        {
+          fontSize: "2rem",
+          marginTop: "-40px",
+          color: "#231f20",
+          ease: "power2.out",
+        },
+        {
+          fontSize: "1.2rem",
+          marginTop: "-24px",
+          color: "#C7A534",
+          ease: "power2.out",
+        },
+        "<"
+      );
+    },
+    "(max-width: 767px)": function () {
+      tl.to(
+        // Decrease Size 1
+        "#pslsc-0 .title",
+        {
+          fontSize: "1.8rem",
+          color: "#C7A534",
+          ease: "power2.out",
+        },
+        "<2"
+      ).to(
+        "#pslsc-0 .subtitle",
+        {
+          fontSize: "0.8rem",
+          marginTop: "-16px",
+          color: "#C7A534",
+          ease: "power2.out",
+        },
+        "<"
+      );
+    },
+    all: function () {
+      tl.to(
+        "#ps-rs-0",
+        {
+          innerText: 35000,
+          snap: {
+            innerText: 1,
+          },
+          ease: "power2.out",
+          // modifiers: {
+          //   innerText: function (value) {
+          //     return new Intl.NumberFormat().format(Math.floor(value));
+          //   },
+          // },
+        },
+        "<"
+      )
+        .to(
+          "#ps-rs-1",
+          {
+            innerText: 8250,
+            snap: {
+              innerText: 1,
+            },
+            ease: "power2.out",
+            // modifiers: {
+            //   innerText: function (value) {
+            //     return new Intl.NumberFormat().format(Math.floor(value)) || 0;
+            //   },
+            // },
+          },
+          "<"
+        )
+        .to(
+          "#ps-rs-2",
+          {
+            innerText: 43250,
+            snap: {
+              innerText: 1,
+            },
+            ease: "power2.out",
+            // modifiers: {
+            //   innerText: function (value) {
+            //     return new Intl.NumberFormat().format(Math.floor(value)) || 0;
+            //   },
+            // },
+          },
+          "<"
+        );
+    },
+  });
+
+  ScrollTrigger.matchMedia({
+    "(min-width: 768px)": function () {
+      tl.to(
+        "#pslsc-1 .title",
+        {
+          fontSize: "6rem",
+          color: "#231f20",
+          ease: "power2.out",
+        },
+        "<"
+      )
+        .to(
+          "#pslsc-1 .subtitle",
+          {
+            fontSize: "2rem",
+            marginTop: "-40px",
+            color: "#231f20",
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#pslsc-2 .title",
+          {
+            fontSize: "6rem",
+            color: "#231f20",
+            ease: "power2.out",
+          },
+          "<3"
+        )
+        .to(
+          "#pslsc-2 .subtitle",
+          {
+            fontSize: "2rem",
+            marginTop: "-40px",
+            color: "#231f20",
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#pslsc-1 .title",
+          {
+            fontSize: "3rem",
+            color: "#C7A534",
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#pslsc-1 .subtitle",
+          {
+            fontSize: "1.2rem",
+            marginTop: "-24px",
+            color: "#C7A534",
+            ease: "power2.out",
+          },
+          "<"
+        );
+    },
+    "(max-width: 767px)": function () {
+      tl.to(
+        "#pslsc-1 .title",
+        {
+          fontSize: "3rem",
+          color: "#231f20",
+          ease: "power2.out",
+        },
+        "<"
+      )
+        .to(
+          "#pslsc-1 .subtitle",
+          {
+            fontSize: "1.3rem",
+            marginTop: "-20px",
+            color: "#231f20",
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#pslsc-2 .title",
+          {
+            fontSize: "3rem",
+            color: "#231f20",
+            ease: "power2.out",
+          },
+          "<3"
+        )
+        .to(
+          "#pslsc-2 .subtitle",
+          {
+            fontSize: "1.3rem",
+            marginTop: "-20px",
+            color: "#231f20",
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#pslsc-1 .title",
+          {
+            fontSize: "1.8rem",
+            color: "#C7A534",
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#pslsc-1 .subtitle",
+          {
+            fontSize: "0.8rem",
+            marginTop: "-16px",
+            color: "#C7A534",
+            ease: "power2.out",
+          },
+          "<"
+        );
+    },
+    all: function () {
+      tl.to(
+        "#ps-rs-0",
+        {
+          innerText: 350000,
+          snap: {
+            innerText: 1,
+          },
+          ease: "power2.out",
+          // modifiers: {
+          //   innerText: function (value) {
+          //     return new Intl.NumberFormat().format(Math.floor(value));
+          //   },
+          // },
+        },
+        "<"
+      )
+        .to(
+          "#ps-rs-1",
+          {
+            innerText: 82500,
+            snap: {
+              innerText: 1,
+            },
+            ease: "power2.out",
+            // modifiers: {
+            //   innerText: function (value) {
+            //     return new Intl.NumberFormat().format(Math.floor(value)) || 0;
+            //   },
+            // },
+          },
+          "<"
+        )
+        .to(
+          "#ps-rs-2",
+          {
+            innerText: 432500,
+            snap: {
+              innerText: 1,
+            },
+            ease: "power2.out",
+            // modifiers: {
+            //   innerText: function (value) {
+            //     return new Intl.NumberFormat().format(Math.floor(value)) || 0;
+            //   },
+            // },
+          },
+          "<"
+        )
+        .to(
+          "#PlasticSavingCalculator",
+          {
+            opacity: 0,
+            display: "none",
+            y: -10,
+            ease: "power2.out",
+          },
+          "<3"
+        )
+        .to(
+          "#PaperSavingCalculator",
+          {
+            opacity: 1,
+            display: "flex",
+            duration: 1,
+            y: -10,
+            ease: "power2.out",
+          },
+          "<1"
+        )
+        .to(
+          "#paper-saving-initial-content",
+          {
+            opacity: 1,
+            display: "inline",
+            y: -40,
+            ease: "power2.out",
+          },
+          "<2"
+        )
+        .fromTo(
+          "#bg-attachment",
+          {
+            background:
+              "radial-gradient(278.83% 61.5% at 38.48% 42.44%, #F5CA01 0%, #FEAE00 100%)",
+            duration: 0.3,
+            animationDuration: 1,
+            ease: "power2.inOut",
+          },
+          {
+            background:
+              "radial-gradient(278.83% 61.5% at 38.48% 42.44%, #fff 0%, #ddd 100%)",
+            duration: 0.3,
+            animationDuration: 1,
+            ease: "power2.inOut",
+          },
+          "<"
+        )
+        .fromTo(
+          "#eco-cup-1",
+          {
+            display: "none",
+            ease: "power2.out",
+          },
+          {
+            display: "inline",
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#eco-cup-1",
+          {
+            scale: 1,
+            duration: 1.5,
+            animationDuration: 1.5,
+            y: 60,
+            ease: "power1.inOut",
+          },
+          "<3"
+        )
+        .fromTo(
+          "#eco-capsule-bg", // Add Paper Cup here
+          {
+            background: flatbg,
+            animationDuration: 1,
+            ease: "power2.out",
+          },
+          {
+            background: radialbg,
+            animationDuration: 1,
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#paper-saving-additional-content",
+          {
+            opacity: 1,
+            y: 30,
+            ease: "power2.out",
+          },
+          "<0.7"
+        )
+        .to(
+          "#ppslsc",
+          {
+            innerText: "PAPER",
+            ease: "power2.out",
+          },
+          "<3"
+        )
+        .to(
+          "#ppsrsc .from-num",
+          {
+            innerText: 25,
+            snap: {
+              innerText: 1,
+            },
+            duration: 1,
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#ppsrsc .to-num",
+          {
+            innerText: 35,
+            snap: {
+              innerText: 1,
+            },
+            duration: 1,
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#ppslsc",
+          {
+            innerText: "BAGASSE",
+            ease: "power2.out",
+          },
+          "<3"
+        )
+        .to(
+          "#ppsrsc .from-num",
+          {
+            innerText: 30,
+            snap: {
+              innerText: 1,
+            },
+            duration: 1,
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .to(
+          "#ppsrsc .to-num",
+          {
+            innerText: 40,
+            snap: {
+              innerText: 1,
+            },
+            duration: 1,
+            ease: "power2.out",
+          },
+          "<"
+        );
+    },
+  });
+</script>
+
+<style>
+  /* Add to your global CSS */
+  #noPlastic {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Optional scroll lock */
+  .no-scroll {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* Performance optimizations */
+  .will-change-transform {
+    will-change: transform, opacity;
+  }
+</style>

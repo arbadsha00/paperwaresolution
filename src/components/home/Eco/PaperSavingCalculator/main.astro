@@ -1,0 +1,115 @@
+---
+import EcoCup from "./EcoCup";
+
+// Paper Saving Calculator
+---
+
+<paper-saving-calculator
+  class="min-h-screen flex-col justify-center items-center relative hidden opacity-0 will-change-transform"
+  id="PaperSavingCalculator"
+>
+  <h1
+    id="paper-saving-initial-content"
+    class="text-3xl md:text-6xl uppercase text-center -mt-[20vh] font-black items-center will-change-transform hidden opacity-0 text-dark"
+  >
+    How Much Cost<br />We are saving
+  </h1>
+
+  <div
+    id="paper-saving-additional-content"
+    class="flex flex-row gap-20 items-center h-full w-full max-h-80 justify-between relative opacity-0"
+  >
+    <!-- Content Inside -->
+    <div
+      id="pps-left-side-content"
+      class="font-black text-right flex-1 w-full flex gap-5 flex-col items-end justify-between"
+    >
+      <div class="text-dark flex flex-col items-end gap-2">
+        <p id="ppslsc" class="title text-xl md:text-[2rem]">PLASTIC</p>
+        <p class="subtitle text-7xl md:text-[6rem]">lid</p>
+      </div>
+    </div>
+    <div id="pps-center-thumb-bar" class="relative hidden h-full w-6">
+      <!-- <Image
+        src={"/thumb.svg"}
+        height={40}
+        width={40}
+        alt={"thumb-icon"}
+        class={"absolute top-0 size-32 left-1/2 -translate-x-1/2"}
+      /> -->
+      <svg
+        width="39"
+        height="39"
+        viewBox="0 0 39 39"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute left-1/2 -translate-x-1/2"
+      >
+        <g filter="url(#filter0_d_180_2528)">
+          <circle
+            cx="19.5"
+            cy="15.5"
+            r="15.5"
+            fill="url(#paint0_radial_180_2528)"></circle>
+        </g>
+        <defs>
+          <filter
+            id="filter0_d_180_2528"
+            x="0"
+            y="0"
+            width="39"
+            height="39"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+          >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix
+              in="SourceAlpha"
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"></feColorMatrix>
+            <feOffset dy="4"></feOffset>
+            <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+            <feComposite in2="hardAlpha" operator="out"></feComposite>
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+            ></feColorMatrix>
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_180_2528"></feBlend>
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow_180_2528"
+              result="shape"></feBlend>
+          </filter>
+          <radialGradient
+            id="paint0_radial_180_2528"
+            cx="0"
+            cy="0"
+            r="1"
+            gradientUnits="userSpaceOnUse"
+            gradientTransform="translate(17 6.5) rotate(84.1737) scale(24.6272)"
+          >
+            <stop stop-color="#FFE362"></stop>
+            <stop offset="0.47" stop-color="#FEAE00"></stop>
+            <stop offset="1" stop-color="#D18F00"></stop>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <div id="pps-right-side-content" class="flex flex-col gap-8 flex-1 w-full">
+      <div class="">
+        <p class="text-xl md:text-3xl font-black" id="ppsrsc">
+          <span class="from-num">10</span>% - <span class="to-num">20</span>%
+        </p>
+        <p class="text-sm md:text-xl font-medium">with 12oz Paper cup</p>
+      </div>
+    </div>
+  </div>
+  <div id="eco-cup-1" class="hidden scale-0">
+    <EcoCup client:only="react" />
+  </div>
+</paper-saving-calculator>

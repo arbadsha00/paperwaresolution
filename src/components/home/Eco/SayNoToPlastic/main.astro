@@ -1,0 +1,35 @@
+---
+// Say no to plastic section
+// import Ball from "./interactive-ball.astro";
+import { PlasticBall } from "./PlasticBall";
+---
+
+<section
+  class="min-h-screen flex flex-col justify-center items-center relative"
+  id="noPlastic"
+>
+  <div
+    id="no-plastic-initial-content"
+    class="flex flex-col justify-center items-center will-change-transform"
+    data-aos="fade-up"
+  >
+    <h1 class="text-6xl md:text-9xl font-black flex items-center">
+      SAY N<span
+        ><PlasticBall PlasticBallId="plasticBall-1" client:only="react" /></span
+      >
+    </h1>
+    <h1 class="text-6xl md:text-9xl font-black flex items-center">
+      T<span
+        ><PlasticBall PlasticBallId="plasticBall-2" client:only="react" /></span
+      >&nbsp;PLASTIC
+    </h1>
+  </div>
+  <p
+    id="no-plastic-additional-content"
+    class="max-w-[min(42rem,95vw)] text-sm md:text-2xl font-bold text-center leading-relaxed hidden opacity-0 will-change-transform"
+  >
+    Over 500 billion single-use cups are made yearly, with millions of tones of
+    plastic lids ending up as waste. Most are non-recyclable, polluting
+    landfills and the environment.
+  </p>
+</section>

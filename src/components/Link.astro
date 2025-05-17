@@ -1,0 +1,18 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { id = "", href = "#" } = Astro.props;
+
+// Re-usable Link
+---
+
+<a
+  id={id}
+  href={href}
+  class="tracking-wider text-left uppercase text-sm h-fit relative text-primary font-black [&>#underbg]:bg-paper [&:hover>#underbg]:bg-dark/20 px-2 mx-auto"
+>
+  <span class="z-0"><slot /></span>
+  <Icon name="lsicon:open-new-outline" class={"text-2xl inline z-0"} />
+  <div id="underbg" class="absolute bottom-[5%] left-0 w-full h-1/2 -z-10">
+  </div>
+</a>
