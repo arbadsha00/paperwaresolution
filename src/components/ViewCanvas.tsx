@@ -28,7 +28,7 @@ export default function ViewCanvas() {
         </Suspense>
       </Canvas>
       {/* <Loading /> */}
-      {/* <Loader
+      <Loader
         containerStyles={{
           position: "fixed",
           top: 0,
@@ -51,7 +51,7 @@ export default function ViewCanvas() {
         dataStyles={{
           display: "none",
         }}
-      /> */}
+      />
     </>
   );
 }
