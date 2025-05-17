@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Loading() {
   const { progress } = useProgress();
- const [isDone, setIsDone] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     // Only mark as done when progress hits 100%
@@ -22,7 +22,7 @@ export default function Loading() {
   }, [progress, isDone]);
 
   if (isDone) return null;
-console.log(progress);
+
   return (
     <div
       className={`fixed inset-0 z-[200] items-center justify-center bg-[#EBAC00] ${

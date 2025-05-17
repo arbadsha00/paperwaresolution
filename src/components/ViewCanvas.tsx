@@ -27,7 +27,7 @@ export default function ViewCanvas() {
           <View.Port />
         </Suspense>
       </Canvas>
-      <Loading />
+      {/* <Loading /> */}
       {/* <Loader
         containerStyles={{
           position: "fixed",
