@@ -1,12 +1,12 @@
 import * as THREE from "three";
-import React, { forwardRef, useMemo, useRef } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 type PrimitiveProps = React.ComponentProps<"group">;
 
 export const Cup2_3d = forwardRef<THREE.Group, PrimitiveProps>((props, ref) => {
   const { nodes } = useGLTF("/ripple_cup7.glb") as any;
   const normalMap = useTexture("/map512.webp");
-  useMemo(() => {
+  useEffect(() => {
     if (normalMap) {
       normalMap.wrapS = THREE.RepeatWrapping;
       normalMap.wrapT = THREE.RepeatWrapping;
@@ -27,17 +27,15 @@ export const Cup2_3d = forwardRef<THREE.Group, PrimitiveProps>((props, ref) => {
     []
   );
 
-  const material2 = useMemo(
-    () =>
-      new THREE.MeshStandardMaterial({
-        color: 0xe05100,
-        normalMap: normalMap,
-        normalScale: new THREE.Vector2(1, -1),
-        roughness: 0.5,
-        metalness: 0,
-      }),
-    [normalMap]
-  );
+  const material2 = useMemo(() => {
+    return new THREE.MeshStandardMaterial({
+      color: 0xe05100,
+      normalMap,
+      normalScale: new THREE.Vector2(1, -1),
+      roughness: 0.5,
+      metalness: 0,
+    });
+  }, [normalMap]);
   return (
     <group ref={ref} {...props} dispose={null}>
       <mesh

@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -7,45 +7,63 @@ type PrimitiveProps = React.ComponentProps<"group">;
 export const PaperCup = forwardRef<THREE.Group, PrimitiveProps>(
   (props, ref) => {
     const { nodes } = useGLTF("/Paper_Cup.glb") as any;
-    const textures = [
-      useTexture("./textures/texture-2.webp"),
-      useTexture("./textures/texture-1.webp"),
-      useTexture("./textures/texture-6.webp"),
-    ];
+       // Load and memoize textures
+    const [tex2, tex1, tex6] = useTexture([
+      "./textures/texture-2.webp",
+      "./textures/texture-1.webp",
+      "./textures/texture-6.webp",
+    ]);
 
-    const material1 = new THREE.MeshStandardMaterial({
-      color: 0x000000,
-      roughness: 0,
-      metalness: 0,
-    });
+    const textures = useMemo(() => [tex2, tex1, tex6], [tex2, tex1, tex6]);
 
-    const texturedMaterial = new THREE.MeshStandardMaterial({
-      map: textures[1],
-      roughness: 0.5,
-      metalness: 0.1,
-    });
-    // Recursively changing cup textures
-    let currentTextureIndex = 0;
-    function smoothTextureTransition() {
-      currentTextureIndex = (currentTextureIndex + 1) % textures.length;
-      const nextTexture = textures[currentTextureIndex];
-
-      // Animate the texture transition
-      gsap.to(texturedMaterial, {
-        duration: 4, // Duration of the transition
-        delay: 4,
-        ease: "power1.inOut",
-        onUpdate: () => {
-          texturedMaterial.map = nextTexture; // Update texture during transition
-        },
-        onComplete: () => {
-          smoothTextureTransition(); // Repeat the process
-        },
+    // Create materials once
+    const material1 = useMemo(() => {
+      return new THREE.MeshStandardMaterial({
+        color: 0x000000,
+        roughness: 0,
+        metalness: 0,
       });
-    }
+    }, []);
 
-    // Start the texture transition cycle
-    smoothTextureTransition();
+    const texturedMaterial = useMemo(() => {
+      return new THREE.MeshStandardMaterial({
+        map: tex1,
+        roughness: 0.5,
+        metalness: 0.1,
+      });
+    }, [tex1]);
+
+    // Ref to manage current texture index
+    const textureIndexRef = useRef(0);
+
+    useEffect(() => {
+      let isMounted = true;
+
+      function smoothTextureTransition() {
+        if (!isMounted) return;
+
+        textureIndexRef.current = (textureIndexRef.current + 1) % textures.length;
+        const nextTexture = textures[textureIndexRef.current];
+
+        gsap.to({}, {
+          duration: 4,
+          delay: 4,
+          onUpdate: () => {
+            texturedMaterial.map = nextTexture;
+            texturedMaterial.needsUpdate = true;
+          },
+          onComplete: () => {
+            smoothTextureTransition();
+          },
+        });
+      }
+
+      smoothTextureTransition();
+
+      return () => {
+        isMounted = false;
+      };
+    }, [textures, texturedMaterial]);
 
     return (
       <group ref={ref} {...props} dispose={null}>

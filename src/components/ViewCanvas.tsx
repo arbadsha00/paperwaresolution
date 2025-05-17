@@ -17,13 +17,17 @@ export default function ViewCanvas() {
           pointerEvents: "none",
           zIndex: 10,
         }}
-        gl={{ antialias: true }}
+        gl={{
+          antialias: true,
+          powerPreference: "high-performance",
+        }}
+        dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
           <View.Port />
         </Suspense>
       </Canvas>
-<Loading/>
+      <Loading />
       {/* <Loader
         containerStyles={{
           position: "fixed",
