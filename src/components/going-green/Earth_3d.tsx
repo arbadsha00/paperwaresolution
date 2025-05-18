@@ -27,7 +27,7 @@ export const Earth_3d = forwardRef<THREE.Group, PrimitiveProps>((props) => {
     };
   }, []);
 
-  const texture = useTexture("./textures/earth.avif");
+  const texture = useTexture("./textures/earth.webp");
   const texturedMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       map: texture,
