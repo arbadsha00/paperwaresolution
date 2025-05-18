@@ -6,7 +6,7 @@ type PrimitiveProps = React.ComponentProps<"group">;
 
 export const Cup1_3d = forwardRef<THREE.Group, PrimitiveProps>((props, ref) => {
   const { nodes } = useGLTF("/Paper_Cup.glb") as any;
-  const texture = useTexture("./textures/texture-3.webp");
+  const texture = useTexture("/textures/texture-3.webp");
   const material1 = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: 0x000000,

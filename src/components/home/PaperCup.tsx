@@ -7,11 +7,11 @@ type PrimitiveProps = React.ComponentProps<"group">;
 export const PaperCup = forwardRef<THREE.Group, PrimitiveProps>(
   (props, ref) => {
     const { nodes } = useGLTF("/Paper_Cup.glb") as any;
-       // Load and memoize textures
+    // Load and memoize textures
     const [tex2, tex1, tex6] = useTexture([
-      "./textures/texture-2.webp",
-      "./textures/texture-1.webp",
-      "./textures/texture-6.webp",
+      "/textures/texture-2.webp",
+      "/textures/texture-1.webp",
+      "/textures/texture-6.webp",
     ]);
 
     const textures = useMemo(() => [tex2, tex1, tex6], [tex2, tex1, tex6]);
@@ -42,20 +42,24 @@ export const PaperCup = forwardRef<THREE.Group, PrimitiveProps>(
       function smoothTextureTransition() {
         if (!isMounted) return;
 
-        textureIndexRef.current = (textureIndexRef.current + 1) % textures.length;
+        textureIndexRef.current =
+          (textureIndexRef.current + 1) % textures.length;
         const nextTexture = textures[textureIndexRef.current];
 
-        gsap.to({}, {
-          duration: 4,
-          delay: 4,
-          onUpdate: () => {
-            texturedMaterial.map = nextTexture;
-            texturedMaterial.needsUpdate = true;
-          },
-          onComplete: () => {
-            smoothTextureTransition();
-          },
-        });
+        gsap.to(
+          {},
+          {
+            duration: 4,
+            delay: 4,
+            onUpdate: () => {
+              texturedMaterial.map = nextTexture;
+              texturedMaterial.needsUpdate = true;
+            },
+            onComplete: () => {
+              smoothTextureTransition();
+            },
+          }
+        );
       }
 
       smoothTextureTransition();

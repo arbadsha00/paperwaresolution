@@ -5,7 +5,7 @@ type PrimitiveProps = React.ComponentProps<"group">;
 
 export const Cup3_3d = forwardRef<THREE.Group, PrimitiveProps>((props, ref) => {
   const { nodes } = useGLTF("/doubleWall_cup.glb") as any;
-  const texture = useTexture("./textures/texture-8.webp");
+  const texture = useTexture("/textures/texture-8.webp");
   const material1 = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: 0x000000,
