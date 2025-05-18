@@ -1,0 +1,20 @@
+---
+const { id, step } = Astro.props;
+---
+
+<div 
+  class="flex flex-row item-center odd:justify-start even:justify-end w-full"
+>
+  <div
+    class="flex flex-row items-center gap-3 max-w-xl px-6 py-10 border border-white/10 bg-gray-100/20 shadow-[inset_10px_8px_23.3px_rgba(179,255,169,0.36)] backdrop-blur-[5.55px] rounded-4xl"
+  >
+    <h1
+      class="flex items-center justify-center text-xl md:text-2xl min-w-[25px] p-1 rounded-full text-black/60 bg-white/40 font-bold"
+    >
+      {id}
+    </h1>
+    <p class="text-black/60 font-semibold text-sm md:text-base">
+      {step}
+    </p>
+  </div>
+</div>

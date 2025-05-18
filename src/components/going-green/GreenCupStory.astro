@@ -1,0 +1,72 @@
+---
+import Green_Cup from "./Green_Cup.astro";
+import StoryCard from "./StoryCard.astro";
+const stories = [
+  {
+    id: 1,
+    step: "Paper, plastic, packing material, printing plates, food grade ink are prepared.",
+  },
+  {
+    id: 2,
+    step: "Flexo printing or offset printing techniques are carefully applied to the prepared materials.",
+  },
+  {
+    id: 3,
+    step: "Die cutting machines cut large amounts of shapes in a short time frame.",
+  },
+  {
+    id: 4,
+    step: "Shapes are then fed into a forming machine that gets to transform them into paper cups.",
+  },
+  {
+    id: 5,
+    step: "In the packing process, the cups are stacked together in definite numbers and wrapped by plastic bags.",
+  },
+  {
+    id: 6,
+    step: "Free 1 month warehouse for stocking before cost-saving delivery.",
+  },
+];
+---
+
+<section
+  id="green-cup-story"
+  class="flex flex-col items-center justify-center min-h-screen p-6 mt-20"
+>
+  <div class="text-center space-y-6">
+    <h1 class="text-5xl md:text-7xl font-black text-[#102B01]">
+      Story of a <br />Green Cup
+    </h1>
+    <p class="w-3/4 mx-auto font-semibold text-[#133500]">
+      Discover the Sustainable Process, Thoughtful Design, and Purpose Behind
+      Every Green Cup
+    </p>
+  </div>
+
+  <Green_Cup />
+
+  <section
+    id="story-card-container"
+    class="flex flex-col items-center justify-center w-full gap-6"
+  >
+    {stories.map((story) => <StoryCard id={story.id} step={story.step} />)}
+  </section>
+</section>
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  const stories = document.getElementById("story-card-container");
+  const cup = document.getElementById("green-cup");
+  const timeln = gsap.timeline({ paused: true });
+
+  timeln.fromTo(cup, { y: 0 }, { y: "100vh", duration: 1, ease: "none" }, 0);
+
+  const scroll_1 = ScrollTrigger.create({
+    animation: timeln,
+    trigger: stories,
+    start: "top bottom",
+    end: "bottom center",
+    scrub: true,
+  });
+</script>

@@ -1,0 +1,19 @@
+---
+import Earth from "./Earth";
+---
+
+<section
+  id="green-hero"
+  class="flex flex-col items-center justify-center min-h-screen gap-10 p-6"
+>
+  <div class="text-center space-y-2">
+    <h1 class="text-4xl md:text-7xl font-black text-[#102B01]">
+      Raise Your Cup to a <br />Greener World
+    </h1>
+    <p class="md:w-3/4 mx-auto font-semibold text-[#133500]">
+      Crafted with care for the planet, our cups are sustainably made and
+      responsibly enjoyed — one sip closer to a cleaner future.
+    </p>
+  </div>
+  <Earth client:only="react" />
+</section>

@@ -3,7 +3,6 @@ import {
   Environment,
   View,
   PerspectiveCamera,
-  ContactShadows,
 } from "@react-three/drei";
 
 import { gsap } from "gsap";

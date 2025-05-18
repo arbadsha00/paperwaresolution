@@ -1,0 +1,98 @@
+---
+
+---
+
+<section id="recycle-3d" class="w-full h-auto pointer-events-auto"></section>
+<script>
+  import * as THREE from "three";
+  import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+  import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+  import { gsap } from "gsap";
+  import { loadEnvironment, setRenderer } from "../../utils/gainMap";
+  // Set up the scene, camera
+  const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  setRenderer(renderer);
+
+  // Orbit Controls (Disable Zoom)
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.01;
+  controls.screenSpacePanning = false;
+  controls.enableZoom = false; // Disable zoom
+  controls.enablePan = false;
+  controls.minPolarAngle = Math.PI / 2; // Lock vertical rotation
+  controls.maxPolarAngle = Math.PI / 2; // Allow looking slightly
+  controls.target.set(0, 0, 0);
+  controls.update();
+  const container = document.getElementById("recycle-3d");
+  const setRelativeRendererSize = () => {
+    //   renderer size
+
+    const containerWidth = container?.clientWidth || 512;
+    const containerHeight = container?.clientWidth || 512;
+    renderer.setSize(containerWidth, containerHeight);
+  };
+
+  window.addEventListener("resize", setRelativeRendererSize);
+
+  if (!container) {
+    console.error("Container #tree-3d not found!");
+  } else {
+    setRelativeRendererSize();
+
+    renderer.setClearColor(0xffffff, 0);
+    renderer.setAnimationLoop(animate);
+    container.appendChild(renderer.domElement);
+  }
+
+  loadEnvironment().then((env) => {
+    scene.environment = env;
+    scene.background = null;
+  });
+
+  let recycle: THREE.Object3D | null = null;
+  // Load 3D Model
+  const loader = new GLTFLoader();
+  loader.load(
+    "/recycle.glb",
+    function (gltf) {
+      recycle = gltf.scene;
+      gsap.to(recycle.rotation, {
+        y: "+=6.28",
+        repeat: -1,
+
+        duration: 30,
+        ease: "none",
+      });
+      recycle.rotation.y = -1.5;
+      recycle.scale.set(5, 5, 5);
+      scene.add(recycle);
+    },
+    undefined,
+    function (error) {
+      console.error(error);
+    }
+  );
+
+  // //   //   // Add Lights
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+  directionalLight.position.set(15, 5, 10);
+  //   directionalLight.castShadow = true;
+  scene.add(directionalLight);
+  const shadowCameraHelper = new THREE.CameraHelper(
+    directionalLight.shadow.camera
+  );
+  //   scene.add(shadowCameraHelper);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+  scene.add(ambientLight);
+
+  // spotLight.castShadow = true;
+  camera.position.set(0, 0, 1);
+
+  function animate() {
+    controls.update();
+    renderer.render(scene, camera);
+  }
+</script>

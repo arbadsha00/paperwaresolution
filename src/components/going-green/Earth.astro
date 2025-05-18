@@ -1,0 +1,116 @@
+---
+
+---
+
+<section
+  id="earth-3d"
+  class="w-[85vw] h-auto max-w-[512px] mx-auto aspect-square z-5 pointer-events-auto overflow-visible relative"
+>
+</section>
+<script>
+  import * as THREE from "three";
+  import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+  import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+  import { gsap } from "gsap";
+  // import { loadEnvironment, setRenderer } from "../../utils/gainMap";
+  // Set up the scene, camera
+  const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  // setRenderer(renderer);
+
+  // Orbit Controls (Disable Zoom)
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.01;
+  controls.screenSpacePanning = false;
+  controls.enableZoom = false; // Disable zoom
+  controls.enablePan = false;
+  //   controls.minPolarAngle = Math.PI / 6; // Lock vertical rotation
+  //   controls.maxPolarAngle = Math.PI / 4; // Allow looking slightly
+  controls.target.set(0, 0, 0);
+  controls.update();
+  const container = document.getElementById("earth-3d");
+  const setRelativeRendererSize = () => {
+    //   renderer size
+
+    const containerWidth = container?.clientWidth || 512;
+    const containerHeight = container?.clientWidth || 512;
+    renderer.setSize(containerWidth, containerHeight);
+  };
+
+  window.onresize = () => {
+    setRelativeRendererSize();
+  };
+  if (!container) {
+    console.error("Container #tree-3d not found!");
+  } else {
+    setRelativeRendererSize();
+
+    renderer.setClearColor(0xffffff, 0);
+    renderer.setAnimationLoop(animate);
+    container.appendChild(renderer.domElement);
+  }
+
+  // loadEnvironment().then((env) => {
+  //   scene.environment = env;
+  //   scene.background = null;
+  // });
+
+  let earth: THREE.Object3D | null = null;
+
+  const textureLoader = new THREE.TextureLoader();
+  const texture = textureLoader.load("/textures/earth.avif");
+  // Load 3D Model
+  const loader = new GLTFLoader();
+  loader.load(
+    "/earth3.glb",
+    function (gltf) {
+      earth = gltf.scene;
+      earth.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          // Check if the material is 'earth' or 'land'
+          if (child.material && child.material.name === "earth") {
+            child.material.map = texture;
+            child.material.needsUpdate = true;
+          }
+        }
+      });
+      earth.rotation.y = 1;
+      gsap.to(earth.rotation, {
+        y: "+=6.28",
+        repeat: -1,
+
+        duration: 30,
+        ease: "none",
+      });
+      // earth.scale.set(11.5, 11.5, 11.5);
+
+      earth.scale.set(22, 22, 22);
+      scene.add(earth);
+    },
+    undefined,
+    function (error) {
+      console.error(error);
+    }
+  );
+
+  // //   // Add Lights
+  // const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+  // directionalLight.position.set(0, 50, -20);
+
+  // scene.add(directionalLight);
+  // // const shadowCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+  // // scene.add(shadowCameraHelper);
+  // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  // scene.add(ambientLight);
+
+  // spotLight.castShadow = true;
+  // camera.position.set(8, 18, 1);
+  camera.position.set(8, 12, 12);
+
+  function animate() {
+    controls.update();
+    renderer.render(scene, camera);
+  }
+</script>

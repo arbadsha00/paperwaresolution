@@ -1,8 +1,6 @@
 import { Canvas } from "@react-three/fiber";
-import { Environment, View } from "@react-three/drei";
+import { View } from "@react-three/drei";
 import { Suspense } from "react";
-import { PaperCup } from "./home/PaperCup";
-import { Loader } from "@react-three/drei";
 import Loading from "./Loading";
 
 export default function ViewCanvas() {
@@ -10,6 +8,8 @@ export default function ViewCanvas() {
     <>
       <Canvas
         style={{
+          width: "100vw",
+          height: "100vh",
           position: "fixed",
           top: 0,
           left: "50%",

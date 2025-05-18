@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { PaperCup } from "../../PaperCup";
 import { Cup3_3d } from "./Cup3_3d";
 
 gsap.registerPlugin(ScrollTrigger);

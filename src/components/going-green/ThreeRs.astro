@@ -1,0 +1,86 @@
+---
+import Recycle3d from "./Recycle3d.astro";
+import Reuse3D from "./Reuse3d.astro";
+import Refuse3D from "./Refuse3d.astro";
+---
+
+<section
+  id="green-3r"
+  class="flex flex-col items-center justify-center min-h-screen gap-50 mad:gap-60 lg:gap-70 p-6"
+>
+  <div class="text-center space-y-2">
+    <h1 class="text-5xl md:text-7xl font-black">
+      '3Rs Rule' to <br />Reduce Waste
+    </h1>
+    <p
+      class="md:w-3/4 mx-auto font-semibold text-black/50 text-sm md:text-base"
+    >
+      By refusing waste, reusing with intention, and recycling responsibly, we
+      are building a future where sustainability isn't an option — it's a way of
+      life.
+    </p>
+  </div>
+
+  <section
+    class="flex flex-col lg:flex-row justify-center items-center gap-40 lg:gap-6"
+  >
+    <div
+      class="flex flex-col items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(0,218,73,0.3)_100%)] rounded-lg relative flex-1"
+    >
+      <h1 class="text-2xl md:text-3xl font-black">RE-USE</h1>
+      <p class="text-black/50 font-semibold text-sm md:text-base">
+        We design durable, multifunctional paperware that encourages reuse,
+        extending the life cycle of every product and reducing waste.
+      </p>
+      <div class="w-[140px] md:w-[180px] absolute -top-[70%] right-10">
+        <Reuse3D />
+      </div>
+      <!-- <img
+        src="/eco/reuse.png"
+        class="w-[140px] md:w-[180px] absolute -top-[70%] right-10"
+        alt=""
+      /> -->
+    </div>
+    <div
+      class="flex flex-col item-end lg:items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(218,0,0,0.3)_100%)] rounded-lg relative lg:mb-32 flex-1"
+    >
+      <h1 class="text-2xl md:text-3xl font-black text-right lg:text-left">
+        REFUSE
+      </h1>
+      <p
+        class="text-black/50 font-semibold text-right lg:text-left text-sm md:text-base"
+      >
+        We refuse to use harmful materials or excessive packaging, ensuring our
+        products are responsibly sourced and truly needed.
+      </p>
+      <div
+        class="w-[140px] md:w-[180px] absolute -top-[70%] left-10 lg:right-10 lg:left-auto"
+      >
+        <Refuse3D />
+      </div>
+      <!-- <img
+        src="/eco/refuse.png"
+        class="w-[140px] md:w-[180px] absolute -top-[70%] left-10 lg:right-10 lg:left-auto"
+        alt=""
+      /> -->
+    </div>
+    <div
+      class="flex flex-col items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(0,218,73,0.3)_100%)] rounded-lg relative flex-1"
+    >
+      <h1 class="text-2xl md:text-3xl font-black">RECYCLE</h1>
+      <p class="text-black/50 font-semibold text-sm md:text-base">
+        Recycling is at the core of our process. We prioritize recyclable
+        materials, use recycled content when possible, and partner with local
+        initiatives.
+      </p>
+      <div class="w-[140px] md:w-[180px] absolute -top-[70%] right-10">
+        <Recycle3d />
+      </div>
+      <!-- <img
+        src="/eco/recycle.png"
+        class="w-[140px] md:w-[180px] absolute -top-[70%] right-10"
+        alt=""
+      /> -->
+    </div>
+  </section>
+</section>

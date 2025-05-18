@@ -2,24 +2,19 @@
 
 ---
 
-<section
-  id="eco-cup-1"
-  class="absolute mx-auto left-1/2 -translate-x-1/2 drop-shadow-sm z-50 !aspect-square w-[90vw] md:max-w-lg -mb-[100%] opacity-0"
->
-</section>
+<section id="green-cup" class="size-[512px]"></section>
 
 <script>
   import * as THREE from "three";
   import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-  // import { loadEnvironment, setRenderer } from "../../../../utils/gainMap";
-  // import { loadEnvironment } from "../../../utils/env";
+  // import { loadEnvironment, setRenderer } from "../../utils/gainMap";
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   // setRenderer(renderer);
 
-  const container = document.getElementById("eco-cup-1");
+  const container = document.getElementById("green-cup");
   // Set renderer size
   const setRelativeRendererSize = () => {
     if (!container || !container?.clientWidth)
@@ -37,28 +32,28 @@
 
   renderer.setClearColor(0xffffff, 0);
   renderer.setAnimationLoop(animate);
-  document.getElementById("eco-cup-1")!.appendChild(renderer.domElement);
+  document.getElementById("green-cup")!.appendChild(renderer.domElement);
 
-  //   loadEnvironment().then((env) => {
+//   loadEnvironment().then((env) => {
+  
+//   scene.environment = env;
+//   scene.background = null;
 
-  //   scene.environment = env;
-  //   scene.background = null;
-
-  // });
+// });
 
   // Load 3D Model
   const loader = new GLTFLoader();
   loader.load(
-    "./Paper_Cup.glb",
+    "/Paper_Cup.glb",
     function (gltf) {
       const cup = gltf.scene;
       const textureLoader = new THREE.TextureLoader();
 
-      const textures = textureLoader.load("./textures/texture-5.webp");
+      const textures = textureLoader.load("/textures/1-01.png");
 
       // Materials
       const material1 = new THREE.MeshStandardMaterial({
-        color: 0x000000, // Black color
+        color: 0x277000, // Black color
         roughness: 0,
         metalness: 0,
       });
@@ -133,7 +128,7 @@
   // Camera Position
   camera.position.set(0, 3.5, 5);
   camera.rotateX(-0.3);
-  camera.rotateZ(0.2);
+  //   camera.rotateZ(0.2);
   // camera.position.set(0, 2.8, 3);
   // camera.rotateX(-0.3);
   function animate() {
