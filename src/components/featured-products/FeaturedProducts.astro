@@ -1,0 +1,95 @@
+---
+import ProductsPair from "./ProductsPair.astro";
+const productPairs = [
+  {
+    product1: {
+      id: 1,
+      name: "PAPER SHOPPING BAG",
+      description:
+        "Our focus is on crafting 100% customized paper bags, made from eco-friendly materials. Available in various sizes: Small (S), Medium (M), Large (L), and Extra Large (XL). Each bag ensures premium quality from start to finish, designed to suit your needs.",
+      image: "/products/product-1.webp",
+    },
+    product2: {
+      id: 2,
+      name: "BURGER & MEAT BOX",
+      description:
+        "We offer a full range of paper food packaging, designed specifically for your burgers. Our products, including takeaway boxes, are made from certified food-grade paper, ensuring both safety and convenience with every use.",
+      image: "/products/product-2.webp",
+    },
+  },
+  {
+    product1: {
+      id: 3,
+      name: "FOOD WRAPPING PAPER",
+      description:
+        "Our oil-resistant food wrapping paper helps keep your food fresh. Made from food-safe materials, our packaging is free from hazardous chemicals, with vibrant logo printing to enhance your brand’s presence while maintaining top hygiene standards.",
+      image: "/products/product-3.webp",
+    },
+    product2: {
+      id: 4,
+      name: "HAND TAG",
+      description:
+        "Our hand tags are easy to customize, flexible, and designed to meet your specific requirements. With various options for design and materials, these tags are perfect for any project, providing both value and functionality.",
+      image: "/products/product-4.webp",
+    },
+  },
+  {
+    product1: {
+      id: 5,
+      name: "CARTON BOX",
+      description:
+        "Our customizable, eco-friendly carton boxes are made from biodegradable, recyclable materials. Lightweight and durable, they are perfect for transporting goods, offering sustainable solutions to meet your packaging needs.",
+      image: "/products/product-5.webp",
+    },
+    product2: {
+      id: 6,
+      name: "LABEL STICKER",
+      description:
+        "These durable, eco-friendly label stickers are weather-resistant and flexible. With outstanding durability and flexibility, they are an ideal choice for your labeling needs while supporting sustainability.",
+      image: "/products/product-6.webp",
+    },
+  },
+  {
+    product1: {
+      id: 7,
+      name: "GIFT BOX",
+      description:
+        "Our gift boxes come in various sizes, colors, and designs to suit any occasion. With endless customization options, these boxes make the perfect presentation for your gifts, reflecting both care and quality.",
+      image: "/products/product-7.webp",
+    },
+    product2: {
+      id: 8,
+      name: "PHARMACEUTICAL GIFT BOX",
+      description:
+        "Our pharmaceutical gift boxes are crafted with the highest standards to preserve the integrity of your products. These boxes not only provide secure packaging but also represent our commitment to quality and well-being.",
+      image: "/products/product-9.webp",
+    },
+  },
+  {
+    product1: {
+      id: 9,
+      name: "BUSINESS CARD",
+      description:
+        "Our paper-based business cards are designed to make a memorable impact while contributing to sustainability. They are a reflection of your environmental responsibility, combining quality with eco-friendly practices.",
+      image: "/products/product-8.webp",
+    },
+    product2: {
+      id: 10,
+      name: "NOTEPAD",
+      description:
+        "Our notepads are perfect for jotting down ideas, fostering creativity, and boosting productivity. Designed to support your innovative journey, these notepads are an essential tool for any project.",
+      image: "/products/product-10.webp",
+    },
+  },
+];
+---
+
+<section
+  class="flex flex-col items-center justify-center min-h-screen gap-10 p-6"
+>
+  {
+    productPairs.map((pair) => (
+      <ProductsPair product1={pair.product1} product2={pair.product2} />
+    ))
+  }
+</section>

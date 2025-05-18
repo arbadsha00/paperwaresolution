@@ -1,0 +1,60 @@
+---
+const { words, speed = 1, direction = "left" } = Astro.props;
+
+interface Props {
+  words: string[];
+  speed?: number;
+  direction?: "left" | "right";
+}
+---
+
+<div
+  class="relative overflow-hidden py-4 bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500"
+>
+  <div class="flex whitespace-nowrap gap-8" id="words-marquee">
+    {words.map((word) => <span class="text-3xl font-bold">{word}</span>)}
+    {/* Duplicate for seamless looping */}
+    {words.map((word) => <span class="text-3xl font-bold ">{word}</span>)}
+  </div>
+</div>
+
+<script
+  is:inline
+  define:vars={{
+    direction,
+    speed,
+    words,
+  }}
+>
+  const init = () => {
+    const marquee = document.getElementById("words-marquee");
+
+    if (!marquee) return;
+
+    const firstSpan = marquee.firstElementChild;
+
+    if (!firstSpan) return;
+
+    const spanWidth =
+      firstSpan.offsetWidth +
+      parseInt(window.getComputedStyle(firstSpan).marginLeft) +
+      parseInt(window.getComputedStyle(firstSpan).marginRight);
+
+    const totalWidth = spanWidth * words.length;
+
+    gsap.to(marquee, {
+      x: direction === "left" ? -totalWidth : totalWidth,
+      duration: 10 / speed,
+      ease: "none",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize((x) => parseFloat(x) % totalWidth),
+      },
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Using for GSAP from Global Import
+    init();
+  });
+</script>

@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/featured-products/Hero.astro";
+import FeaturedProduct from "../components/featured-products/FeaturedProducts.astro";
+// import Marquee from "../components/featured-products/marquee.astro";
+// const items = [
+//   "Sandwich Box",
+//   "Pizza Box",
+//   "Cake Box",
+//   "Chaw Min Box",
+//   "Sweet Box",
+//   "French Fries Packet",
+//   "Food Parcel Bag",
+//   "Paper Cup",
+//   "Food Menu Card",
+//   "Food Menu Board",
+// ];
+---
+
+<Layout>
+  <section class="relative h-fit w-full max-w-[min(80rem,95vw)] mx-auto">
+    <Hero />
+    <FeaturedProduct />
+  </section>
+  <!-- <Marquee words={items} speed={0.3} direction="left" /> -->
+</Layout>

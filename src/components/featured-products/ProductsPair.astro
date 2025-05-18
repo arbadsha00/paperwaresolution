@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+
+const { product1, product2 } = Astro.props;
+---
+
+<div class="flex flex-col md:flex-row items-center justify-center gap-10">
+  <!-- Product 1 -->
+  <div class="flex-1 space-y-16">
+    <!-- Mobile layout -->
+    <div class="md:hidden space-y-8">
+      <Image
+        width={512}
+        height={512}
+        class="w-full rounded-xl aspect-square object-cover"
+        src={product1.image}
+        alt={product1.name}
+        data-aos="fade-up"
+      />
+      <h1 class="text-4xl text-left font-extrabold" data-aos="fade-up">
+        {product1.name}
+      </h1>
+      <p class="text-left font-semibold" data-aos="fade-up">
+        {product1.description}
+      </p>
+    </div>
+
+    <!-- Desktop layout -->
+    <div class="hidden text-right md:flex flex-col justify-between space-y-2">
+      <Image
+        width={512}
+        height={512}
+        class="w-full rounded-xl aspect-square object-cover"
+        src={product1.image}
+        alt={product1.name}
+        data-aos="fade-up"
+      />
+      <div class="py-32 space-y-6" data-aos="fade-right">
+        <h1 class="text-4xl font-extrabold">{product2.name}</h1>
+        <p class="font-semibold">{product2.description}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 2 -->
+  <div class="flex-1 space-y-16">
+    <!-- Mobile layout -->
+    <div class="md:hidden space-y-8">
+      <Image
+        width={512}
+        height={512}
+        class="w-full rounded-xl aspect-square object-cover"
+        src={product2.image}
+        alt={product2.name}
+        data-aos="fade-up"
+      />
+      <h1 class="text-4xl text-left font-extrabold" data-aos="fade-up">
+        {product2.name}
+      </h1>
+      <p class="text-left font-semibold" data-aos="fade-up">
+        {product2.description}
+      </p>
+    </div>
+
+    <!-- Desktop layout -->
+    <div class="hidden md:flex flex-col justify-between text-left space-y-2">
+      <div class="py-32 space-y-6" data-aos="fade-left">
+        <h1 class="text-4xl font-extrabold">{product1.name}</h1>
+        <p class="font-semibold">{product1.description}</p>
+      </div>
+      <Image
+        width={512}
+        height={512}
+        class="w-full rounded-xl aspect-square object-cover"
+        src={product2.image}
+        alt={product2.name}
+        data-aos="fade-up"
+      />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+---
+import Hero3D from "./Hero3d.astro";
+import HeroProducts from "./HeroProducts";
+
+// featured-products/hero
+---
+
+<hero>
+  <section
+    class="p-6 space-y-8 min-h-[90vh] flex flex-col items-center justify-center"
+    id="featured-products-hero"
+  >
+    <h1
+      class="text-5xl xl:text-6xl font-black text-dark text-center w-full"
+      data-aos="fade-up"
+    >
+      Featured Products
+    </h1>
+    <div
+      class="h-auto w-full aspect-[16/9] rounded-2xl min-h-60 flex justify-center items-center overflow-visible"
+    >
+      <HeroProducts client:only="react" />
+    </div>
+    <p
+      class="text-lg font-semibold text-center"
+      data-aos="fade-up"
+      data-aosstart="top bottom"
+    >
+      From eco-conscious paper cups and durable food cartons to custom-designed pizza boxes, meat trays, and retail bags — our featured collection brings together the finest in functional, sustainable packaging solutions crafted to elevate your business while protecting the planet.
+    </p>
+  </section>
+</hero>

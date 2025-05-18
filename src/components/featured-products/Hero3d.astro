@@ -1,0 +1,119 @@
+---
+
+---
+
+<section
+  id="products-3d"
+  class="w-full h-auto aspect-square z-5 pointer-events-auto relative"
+>
+</section>
+<script>
+  import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+  import * as THREE from "three";
+  import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+  import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+  // import { loadEnvironment, setRenderer } from "../../utils/gainMap";
+  // Set up the scene, camera
+  const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+//   setRenderer(renderer);
+//   loadEnvironment().then((env) => {
+  
+//   scene.environment = env;
+//   scene.background = null;
+
+// });
+  // Orbit Controls (Disable Zoom)
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.04;
+  controls.screenSpacePanning = false;
+  controls.enableZoom = false; // Disable zoom
+  controls.enablePan = false;
+  controls.minPolarAngle = Math.PI / 2.1; // Lock vertical rotation
+  controls.maxPolarAngle = Math.PI / 2;
+  controls.minAzimuthAngle = -Math.PI / 14; // -22.5 degrees left
+  controls.maxAzimuthAngle = Math.PI / 14; // Allow looking slightly downward
+  controls.target.set(0, 0.15, 0);
+  controls.update();
+
+  const container = document.getElementById("products-3d");
+  const setRelativeRendererSize = () => {
+    //   renderer size
+
+    const containerWidth = container?.clientWidth || 512;
+    const containerHeight = container?.clientWidth || 512;
+    renderer.setSize(containerWidth, containerHeight);
+  };
+
+  window.onresize = () => {
+    setRelativeRendererSize();
+  };
+  if (!container) {
+    console.error("Container #tree-3d not found!");
+  } else {
+    setRelativeRendererSize();
+
+    renderer.setClearColor(0xffffff, 0);
+    renderer.setAnimationLoop(animate);
+    container.appendChild(renderer.domElement);
+  }
+
+  
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath(
+    "https://www.gstatic.com/draco/versioned/decoders/1.5.6/"
+  );
+  let products: THREE.Object3D | null = null;
+  const loader = new GLTFLoader();
+  loader.setDRACOLoader(dracoLoader);
+  loader.load(
+    "/fp1c.glb",
+    function (gltf) {
+      products = gltf.scene;
+      products.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.castShadow = true;
+        }
+      });
+      products.scale.set(1.4, 1.4, 1.4);
+      scene.add(products);
+    },
+    undefined,
+    function (error) {
+      console.error(error);
+    }
+  );
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const shadowPlaneGeo = new THREE.PlaneGeometry(100, 100);
+  const shadowPlaneMat = new THREE.ShadowMaterial({ opacity: 0.5 });
+  const shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowPlaneMat);
+  shadowPlane.rotation.x = -Math.PI / 2; // lie flat
+  shadowPlane.position.y = 0; // just below the model base
+  shadowPlane.receiveShadow = true;
+  scene.add(shadowPlane);
+  // //   // Add Lights
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(0, 5, 0);
+  directionalLight.shadow.mapSize.set(256, 256);
+  //   directionalLight.shadow.camera.left = -100;
+  //   directionalLight.shadow.camera.right = 100;
+  //   directionalLight.shadow.camera.top = 100;
+  //   directionalLight.shadow.camera.bottom = -100;
+  //   directionalLight.shadow.camera.near = 1;
+  //   directionalLight.shadow.camera.far = 100;
+  //   directionalLight.shadow.camera.updateProjectionMatrix();
+  directionalLight.castShadow = true;
+  scene.add(directionalLight);
+  camera.position.set(0, 0.3, 1);
+  //   const shadowCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+  //   scene.add(shadowCameraHelper);
+  // Animate the scene
+  function animate() {
+    controls.update();
+    renderer.render(scene, camera);
+  }
+</script>
