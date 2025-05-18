@@ -56,7 +56,7 @@
 }
 
 /* Poppins */
-@font-face {
+/* @font-face {
   font-family: "Poppins";
   src: url("/fonts/poppins/300.ttf");
   font-weight: 300;
@@ -107,6 +107,69 @@
 @font-face {
   font-family: "Poppins";
   src: url("/fonts/poppins/900.ttf");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+} */
+/* Poppins - Modern Browsers First */
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/300.woff2") format("woff2"),
+    url("/fonts/poppins/300.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/400.woff2") format("woff2"),
+    url("/fonts/poppins/400.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/500.woff2") format("woff2"),
+    url("/fonts/poppins/500.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/600.woff2") format("woff2"),
+    url("/fonts/poppins/600.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/700.woff2") format("woff2"),
+    url("/fonts/poppins/700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/800.woff2") format("woff2"),
+    url("/fonts/poppins/800.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/900.woff2") format("woff2"),
+    url("/fonts/poppins/900.woff") format("woff");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
