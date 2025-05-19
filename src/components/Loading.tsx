@@ -4,22 +4,31 @@ import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 
 export default function Loading() {
-  const { progress } = useProgress();
+   const { progress, active } = useProgress();
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    // Only mark as done when progress hits 100%
-    if (progress >= 100 && !isDone) {
+    // If nothing is being loaded (active is false) and progress is 0,
+    // we can assume there are no models to load
+    if (!active && progress === 0) {
       setIsDone(true);
-
-      // Hide external loader
-      const preLoadingDiv = document.getElementById("pre-loading");
-      if (preLoadingDiv) {
-        preLoadingDiv.classList.add("hidden");
-        preLoadingDiv.classList.remove("flex");
-      }
+      hidePreLoading();
+      
+    } else if (progress >= 100 && !isDone) {
+      setIsDone(true);
+      hidePreLoading();
     }
-  }, [progress, isDone]);
+  }, [progress, active, isDone]);
+
+  const hidePreLoading = () => {
+  setTimeout(() => {
+    const preLoadingDiv = document.getElementById("pre-loading");
+    if (preLoadingDiv) {
+      preLoadingDiv.classList.add("hidden");
+      preLoadingDiv.classList.remove("flex");
+    }
+  }, 600);
+  };
 
   if (isDone) return null;
 

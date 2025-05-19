@@ -1,0 +1,81 @@
+---
+import Button from "./Button.astro";
+import MenuCup from "./MenuCup";
+// Menu.astro
+const menuItems = [
+  {
+    name: "Home",
+    icon: "material-symbols:home-rounded",
+    active: true,
+    url: "/",
+  },
+  {
+    name: "Company",
+    icon: "ri:building-2-fill",
+    active: false,
+    url: "/company",
+  },
+  {
+    name: "Products",
+    icon: "ix:product",
+    active: false,
+    url: "/featured-products",
+  },
+  {
+    name: "Greenology",
+    icon: "material-symbols:eco",
+    active: false,
+    url: "/going-green",
+  },
+  {
+    name: "Contact",
+    icon: "line-md:phone-filled",
+    active: false,
+    url: "/contact",
+  },
+];
+---
+
+<div
+  id="menu-bar"
+  transition:name="menu"
+  class="fixed top-[-100svh] transition-transform duration-700 ease-out left-0 flex flex-col items-center justify-center h-svh w-svw bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-black p-6 font-poppins z-[100]"
+>
+  <div class="relative mx-auto w-full max-w-4xl">
+    <ul class="relative space-y-5 w-full z-10">
+      {
+        menuItems.map((item) => (
+          <Button icon={item.icon} name={item.name} url={item.url} />
+        ))
+      }
+    </ul>
+    <div id="menu-cup-container" class="z-[102]">
+      <MenuCup client:only="react" />
+    </div>
+  
+  </div>
+  <div
+    class="flex justify-end md:justify-center items-center text-xs gap-2 font-bold text-center cursor-pointer z-10 absolute bottom-0 md:right-10 mx-auto w-full max-w-4xl p-20"
+  >
+    <a
+      href={"https://facebook.com"}
+      target="_blank"
+      class="text-amber-800 hover:text-amber-900 transition duration-300 ease-in-out"
+      >Facebook</a
+    >
+    <span class="h-0.5 w-12 bg-amber-800 rounded-full"></span>
+    <a
+      href={"https://instagram.com"}
+      target="_blank"
+      class="text-amber-800 hover:text-amber-900 transition duration-300 ease-in-out"
+      >Instagram</a
+    >
+    <span class="h-0.5 w-12 bg-amber-800 rounded-full"></span>
+    <a
+      href={"https://linkedin.com"}
+      target="_blank"
+      class="text-amber-800 hover:text-amber-900 transition duration-300 ease-in-out"
+      >LinkedIn</a
+    >
+  </div>
+</div>

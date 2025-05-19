@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-// import Menu from "./menu/Menu.astro";
-// import { Icon } from "astro-icon/components";
+import Menu from "./menu/Menu.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <header
@@ -31,12 +31,12 @@ import { Image } from "astro:assets";
       class="uppercase float-right font-extrabold text-sm cursor-pointer flex flex-row gap-2 items-center justify-center text-dark"
       id="demo-button"
     >
-      <!-- <Icon name={"tabler:cloud-download"} class={"text-2xl"} /> -->
+      <Icon name={"tabler:cloud-download"} class={"text-2xl"} />
       <span>E-BROCHURE</span>
     </button>
   </div>
 </header>
-<!-- <Menu /> -->
+<Menu />
 
 <script>
   const toggleMenu = () => {
@@ -59,6 +59,7 @@ import { Image } from "astro:assets";
   const headerTimeline = gsap.timeline({
     scrollTrigger: "header",
     repeatRefresh: false,
+    delay: 1,
   });
 
   headerTimeline.from("header", {

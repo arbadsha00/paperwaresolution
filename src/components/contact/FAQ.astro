@@ -1,0 +1,82 @@
+---
+import { Icon } from "astro-icon/components";
+import ConnectTitle from "./ConnectTitle.astro";
+import FAQCard from "./FAQCard.astro";
+
+const faqs = [
+  {
+    icon: "ix:product",
+    question: "What types of packaging materials do you offer?",
+    answer:
+      "We offer a wide range of cups (hot, cold, single-wall, double-wall), food containers, boxes, bags, and custom packaging solutions.",
+  },
+  {
+    icon: "ix:product",
+    question: "Do you offer custom printing and design services?",
+    answer:
+      "Yes, we have an in-house design team to help you create custom packaging with your branding and messaging.",
+  },
+  {
+    icon: "ix:product",
+    question: "What are your lead times for production?",
+    answer:
+      "Lead times depend on order size and complexity. Standard products typically ship faster than customized orders. We’ll provide a clear timeline when you place your order.",
+  },
+  {
+    icon: "ix:product",
+    question: "What is your return policy?",
+    answer:
+      "We accept returns for defective or damaged products. Custom printed items may not be eligible for returns. Please refer to our full return policy on our website.",
+  },
+  {
+    icon: "ix:product",
+    question: "Do you have a customer support team?",
+    answer:
+      "Yes, our dedicated customer support team is available to answer your questions and assist with your orders. You can reach us by phone or email.",
+  },
+  {
+    icon: "ix:product",
+    question: "Are your products recyclable and/or compostable?",
+    answer:
+      "We strive to make our products recyclable or compostable wherever possible. Please check your local recycling guidelines or consult our website for specific product disposal information.",
+  },
+  {
+    icon: "ix:product",
+    question: "Do you offer biodegradable or compostable options?",
+    answer:
+      "Yes! We have a dedicated line of compostable cups and packaging materials designed to break down in suitable composting environments.",
+  },
+  {
+    icon: "ix:product",
+    question: "How do you source your materials sustainably?",
+    answer:
+      "We partner with suppliers who share our commitment to responsible forestry practices. We look for certifications such as FSC (Forest Stewardship Council) to ensure the paper comes from well-managed forests.",
+  },
+  {
+    icon: "ix:product",
+    question: "Are your inks and coatings safe and eco-friendly?",
+    answer:
+      "We primarily use plant-based or water-based inks and coatings that minimize the use of harmful chemicals.",
+  },
+  {
+    icon: "ix:product",
+    question: "What is your minimum order quantity (MOQ)?",
+    answer:
+      "MOQs vary depending on the product and customization. Please contact us for a specific quote.",
+  },
+];
+---
+
+<section
+  class="min-h-screen flex flex-col items-center justify-center gap-20 p-6 my-80"
+  id="contact-faq"
+>
+  <ConnectTitle title="FAQs" description="Everything you need to know" />
+  <div class="flex flex-col items-center justify-center w-full max-w-xl gap-6">
+    {
+      faqs.map((faq) => (
+        <FAQCard icon={faq.icon} question={faq.question} answer={faq.answer} />
+      ))
+    }
+  </div>
+</section>

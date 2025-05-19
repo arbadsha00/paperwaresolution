@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+const { icon = "ix:product", question, answer } = Astro.props;
+---
+
+<section
+  class="w-full"
+  data-aos="fade-up"
+  data-aosstart="top 90%"
+  data-aosdelay={0.7}
+>
+  <details class="group">
+    <summary
+      class="flex flex-row justify-between items-center cursor-pointer font-bold text-black gap-2"
+    >
+      <Icon name={icon} class="text-5xl text-amber-900/50" />
+      <span class="flex-1">{question}</span>
+      <svg
+        class="w-5 h-5 transform transition-transform group-open:rotate-180"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"
+        ></path>
+      </svg>
+    </summary>
+    <p class="text-sm text-gray-800 mt-2 pl-14">
+      {answer}
+    </p>
+  </details>
+</section>

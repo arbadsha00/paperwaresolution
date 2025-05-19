@@ -6,6 +6,7 @@ import Loading from "./Loading";
 export default function ViewCanvas() {
   return (
     <>
+      <Loading />
       <Canvas
         style={{
           width: "100vw",
@@ -27,7 +28,7 @@ export default function ViewCanvas() {
           <View.Port />
         </Suspense>
       </Canvas>
-      <Loading />
+
       {/* <Loader
         containerStyles={{
           position: "fixed",

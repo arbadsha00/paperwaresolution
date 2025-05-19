@@ -1,0 +1,20 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon, title, subtitle, link } = Astro.props;
+---
+
+<section
+  class="flex flex-col justify-between items-start w-full h-full aspect-square border-2 border-black/10 rounded-xl p-2 md:p-4"
+  data-aos="fade-up"
+  data-aosstart="top bottom"
+>
+  <Icon name={icon} class={"text-4xl md:text-5xl  text-[#905B00]"} />
+  <div class="space-y-2">
+    <h3 class="md:text-2xl font-extrabold">{title}</h3>
+    <p class="font-bold text-black/50 text-xs md:text-base">
+      {subtitle}
+    </p>
+    <p class="text-xs md:text-base font-semibold underline">{link}</p>
+  </div>
+</section>

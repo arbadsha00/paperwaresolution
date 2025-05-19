@@ -1,0 +1,92 @@
+---
+import ConnectCard from "./ConnectCard.astro";
+import ConnectTitle from "./ConnectTitle.astro";
+
+const cardItems = [
+  {
+    icon: "mingcute:chat-1-line",
+    title: "Chat to sales",
+    subtitle: "Speak to our friendly team",
+    link: "sales@gmail.com",
+  },
+  {
+    icon: "bx:support",
+    title: "Chat to support",
+    subtitle: "We are here to help",
+    link: "support@gmail.com",
+  },
+  {
+    icon: "mingcute:location-line",
+    title: "Visit us",
+    subtitle: "Visit our office HQ",
+    link: "Visit in Google Maps",
+  },
+  {
+    icon: "tdesign:call",
+    title: "Call us",
+    subtitle: "Any day any time",
+    link: "+1234567890",
+  },
+];
+---
+
+<section
+  class="min-h-[80vh] flex flex-col items-center justify-center gap-20 p-6"
+  id="contact-connect"
+>
+  <ConnectTitle
+    title="Let's Connect!"
+    description="Reach out to us for inquiries, collaborations, or support."
+  />
+  <div
+    class="flex flex-col-reverse lg:flex-row items-stretch justify-center w-full gap-6 max-w-xl md:max-w-none"
+  >
+    <div class="grid grid-cols-2 gap-3 md:gap-6 mx-auto w-full flex-1">
+      {
+        cardItems.map((item) => (
+          <ConnectCard
+            icon={item.icon}
+            title={item.title}
+            subtitle={item.subtitle}
+            link={item.link}
+          />
+        ))
+      }
+    </div>
+    <form
+      class="flex flex-col justify-between items-center w-full flex-1 mx-auto gap-6"
+    >
+      <input
+        type="text"
+        placeholder="Full name, e.g. John Doe"
+        class="w-full border-b-2 border-black/10 focus:outline-none focus:border-black p-6 placeholder-black/40 text-xl font-semibold"
+        required
+        data-aos="fade-up"
+        data-aosstart="top bottom"
+      />
+      <input
+        type="email"
+        placeholder="Email, e.g. example@email.com"
+        class="w-full border-b-2 border-black/10 focus:outline-none focus:border-black p-6 placeholder-black/40 text-xl font-semibold"
+        required
+        data-aos="fade-up"
+        data-aosstart="top bottom"
+      />
+      <textarea
+        placeholder="Aa....."
+        rows="5"
+        class="w-full border-2 border-black/10 focus:outline-none focus:border-black p-6 placeholder-black/40 text-xl font-semibold rounded-lg"
+        required
+        data-aos="fade-up"
+        data-aosstart="top bottom"></textarea>
+      <button
+        type="submit"
+        class="w-full bg-black text-white font-black text-2xl py-6 rounded-lg cursor-pointer"
+        data-aos="fade-up"
+        data-aosstart="top bottom"
+      >
+        SEND MESSAGE
+      </button>
+    </form>
+  </div>
+</section>

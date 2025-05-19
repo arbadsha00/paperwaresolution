@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon, name, url = "#" } = Astro.props;
+
+interface Props {
+  name: string;
+  icon: string;
+  url?: string;
+}
+---
+
+<li class="">
+  <a
+    class="flex items-center w-full group transition-colors duration-300 ease-in-out"
+    href={url}
+  >
+    <span
+      class={`text-3xl md:text-5xl font-black transition-colors duration-300 ease-in-out text-amber-800  group-hover:text-amber-950`}
+    >
+      {name}
+    </span>
+    <span
+      class="flex-1 h-0.5 transition-colors duration-300 ease-in-out bg-amber-200 group-hover:bg-amber-950 ml-5 rounded-l-full"
+    ></span>
+    <span
+      class={`rounded-full border-2 p-2 md:p-4 flex items-center justify-center border-amber-200 transition-colors duration-300 ease-in-out text-amber-50 bg-white/20 backdrop-blur-sm group-hover:border-amber-950 group-hover:text-amber-950`}
+    >
+      <Icon name={icon} class={"text-xl md:text-2xl drop-shadow-md"} />
+    </span>
+  </a>
+</li>

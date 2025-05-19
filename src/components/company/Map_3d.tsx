@@ -7,7 +7,7 @@ import gsap from "gsap";
 type PrimitiveProps = React.ComponentProps<"group">;
 
 export const Map_3d = forwardRef<THREE.Group, PrimitiveProps>((props, ref) => {
-  const { nodes } = useGLTF("/map.glb") as any;
+  const { nodes } = useGLTF("/map4.glb") as any;
 
   const texture = useTexture("/textures/paper.webp");
 
@@ -90,4 +90,4 @@ export const Map_3d = forwardRef<THREE.Group, PrimitiveProps>((props, ref) => {
   );
 });
 
-useGLTF.preload("/map.glb");
+useGLTF.preload("/map4.glb");
