@@ -14,7 +14,7 @@ export const Map_3d = forwardRef<THREE.Group, PrimitiveProps>((props, ref) => {
   const createMaterial = () =>
     new THREE.MeshStandardMaterial({
       map: texture,
-      metalness: 1,
+      metalness: 0.5,
       roughness: 1,
     });
 

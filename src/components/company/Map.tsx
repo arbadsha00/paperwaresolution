@@ -194,7 +194,7 @@ export default function Map() {
         far={1000}
         position={[8, 18, 1]}
       />
-      <Environment preset="city" environmentIntensity={0.8} />
+      <Environment files="/courtyard_1k.hdr" />
       <OrbitControls
         enableDamping={true}
         dampingFactor={0.05}
