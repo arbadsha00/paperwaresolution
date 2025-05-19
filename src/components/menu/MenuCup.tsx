@@ -79,7 +79,7 @@ export default function MenuCup() {
       id="menu-cup-container"
       className="absolute top-2/5 -translate-y-1/2 translate-x-1/2 right-8 -z-0 !aspect-square w-full max-w-2xl"
       >
-     <Loading/>
+     
       <Canvas
         gl={{
           antialias: true,
