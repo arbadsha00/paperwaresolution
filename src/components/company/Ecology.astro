@@ -1,0 +1,121 @@
+---
+// Hero section
+import { Icon } from "astro-icon/components";
+import Tree from "./Tree";
+---
+
+<section
+  id="company-ecology"
+  class="flex flex-col justify-center items-center relative my-40"
+>
+  <div
+    class="space-y-4 lg:space-y-8 rounded-full w-[90%] max-w-6xl z-10"
+    id="company-ecology-paper"
+  >
+    <h1
+      class="text-2xl md:text-5xl text-center font-black text-[#1D4606] leading-[1.2] font-poppins"
+      id="company-ecology-title"
+    >
+      Good Thing Happen<br />When We Think Positive
+    </h1>
+    <p
+      class="font-semibold text-center text-sm md:text-lg max-w-2xl mx-auto text-[#3e4639]"
+      id="company-ecology-description"
+    >
+      We deliver sustainable, high-quality packaging with minimal waste and
+      maximum care for the planet.
+    </p>
+    <button
+      class="bg-[#1D4606] text-white py-4 px-10 rounded-full cursor-pointer flex flex-row gap-4 items-center justify-center z-40 mx-auto"
+      id="company-ecology-globe"
+    >
+      <Icon name={"ion:earth-sharp"} class={"text-2xl"} />
+      <span class="font-black">LEARN MORE</span>
+    </button>
+  </div>
+  <div id="tree-container"><Tree client:only="react" /></div>
+</section>
+
+<style></style>
+
+<script>
+  import { gsap } from "gsap";
+  import SplitType from "split-type";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(0);
+
+  const t1 = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#company-ecology-paper",
+      start: "top 70%",
+      toggleActions: "play none none reverse",
+      // markers: true,
+    },
+  });
+
+  t1.from("#company-ecology-paper", {
+    y: 200,
+    opacity: 0,
+    scale: 0.8,
+    duration: 2,
+    ease: "power3.out",
+  });
+  const ecologyTitle = new SplitType("#company-ecology-title", {
+    types: "words",
+  });
+  t1.from(
+    ecologyTitle.words,
+    {
+      duration: 0.7,
+      y: 20,
+      autoAlpha: 0,
+      stagger: 0.1,
+    },
+    "<0.2"
+  );
+  t1.from(
+    "#company-ecology-description",
+    {
+      duration: 1,
+      y: 100,
+      autoAlpha: 0,
+    },
+    "<"
+  );
+  const ecologyDescription = new SplitType("#company-ecology-description", {
+    types: "words",
+  });
+  t1.from(
+    ecologyDescription.words,
+    {
+      duration: 1,
+      x: 20,
+      autoAlpha: 0,
+      stagger: 0.1,
+    },
+    ">"
+  );
+  t1.from(
+    "#company-ecology-globe",
+    {
+      duration: 1,
+      y: 100,
+      autoAlpha: 0,
+    },
+    ">"
+  );
+  t1.from(
+    "#tree-container",
+    {
+      y: 100,
+      opacity: 0,
+      scale: 0,
+      duration: 2,
+      zIndex: -10,
+      ease: "power3.out",
+    },
+    "<0.5"
+  );
+</script>

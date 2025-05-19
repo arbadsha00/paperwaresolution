@@ -1,0 +1,154 @@
+---
+// Hero section
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+---
+
+<hero-section>
+  <section
+    class="min-h-[85vh] p-10 flex flex-col-reverse gap-20 md:gap-2.5 md:flex-row justify-between items-center max-w-6xl mx-auto relative"
+    id="company-hero"
+  >
+    <div class="space-y-7 flex-2/3">
+      <h1
+        class="text-5xl lg:text-7xl font-black text-dark font-poppins"
+        data-aos="fade-right"
+      >
+        Paperware<br />Factory
+      </h1>
+      <p
+        class="font-semibold text-wrap text-sm lg:text-lg max-w-xl text-gray-500"
+        id="hero-description"
+        data-aos="fade-right"
+      >
+        We, Bangladeshi producer and provider of environmentally friendly
+        products, committed to ending plastic pollution and conserving the
+        environment for a better future.
+      </p>
+      <button
+        class="bg-dark text-white font-poppins py-4 px-8 rounded-full cursor-pointer flex flex-row gap-4 items-center justify-center"
+        id="company-our-products"
+        data-aos="fade-right"
+      >
+        <Icon name={"ix:product"} class={"text-2xl"} />
+        <span class="font-bold">OUR PRODUCTS</span>
+      </button>
+    </div>
+
+    <div class="relative font-poppins text-dark uppercase">
+      <div
+        id="hero-image-company"
+        class="p-3 lg:p-5 rounded-full border-2 border-white/30 overflow-hidden"
+      >
+        <Image
+          src="/paperCupMachine.svg"
+          alt="Paperware Factory Logo"
+          height={75}
+          width={100}
+          class="w-[500px] h-full rounded-full object-cover aspect-square"
+          loading={"eager"}
+        />
+      </div>
+      <!-- Stat Bubble: Top Left -->
+      <div
+        class="absolute -top-7 left-1/3 -translate-x-2/3 text-center flex flex-col justify-center items-center p-4 lg:p-6 bg-white/40 backdrop-blur-xs border-2 border-slate-400/20 rounded-full aspect-square hero-bubbles-company"
+      >
+        <h2 class="lg:text-2xl font-black">200+</h2>
+        <p class="font-bold leading-tight text-[10px] lg:text-xs">Employees</p>
+      </div>
+      <!-- Stat Bubble: Top Right -->
+      <div
+        class="absolute top-10 -right-5 text-center flex flex-col justify-center items-center p-4 lg:p-6 bg-white/40 backdrop-blur-xs border-2 border-slate-400/20 rounded-full aspect-square hero-bubbles-company"
+      >
+        <h2 class="lg:text-2xl font-black">100%</h2>
+        <p class="font-bold leading-tight text-[10px] lg:text-xs">
+          Happy<br />Customers
+        </p>
+      </div>
+
+      <!-- Stat Bubble: Bottom Right -->
+      <div
+        class="absolute -bottom-6 -right-4 text-center flex flex-col justify-center items-center p-4 lg:p-6 bg-white/40 backdrop-blur-xs border-2 border-slate-400/20 rounded-full aspect-square hero-bubbles-company"
+      >
+        <h2 class="lg:text-2xl font-black">100+</h2>
+        <p class="font-bold leading-tight text-[10px] lg:text-xs">
+          Million Annual<br />Production
+        </p>
+      </div>
+
+      <!-- Stat Bubble: Bottom Left -->
+      <div
+        class="absolute bottom-6 -left-4 w-auto text-center flex flex-col justify-center items-center p-4 lg:p-6 bg-white/40 backdrop-blur-xs border-2 border-slate-400/20 rounded-full aspect-square hero-bubbles-company"
+      >
+        <h2 class="lg:text-2xl font-black">10+</h2>
+        <p class="font-bold leading-tight text-[10px] lg:text-xs">
+          Years<br />of Business
+        </p>
+      </div>
+    </div>
+  </section>
+  <style>
+    .hero-bubbles-company {
+      will-change: transform;
+    }
+  </style>
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.ticker.lagSmoothing(0);
+
+    const t2 = gsap.timeline({
+      delay: 1,
+      scrollTrigger: "#company-hero",
+    });
+    t2.from("#hero-image-company", {
+      opacity: 0,
+      scale: 0,
+      duration: 2,
+      ease: "power3.out",
+    });
+
+    const bubbles = gsap.utils.toArray<HTMLElement>(".hero-bubbles-company");
+
+    bubbles.forEach((bubble: HTMLElement, index: number) => {
+      // Ball entry animation
+      t2.from(
+        bubble,
+        {
+          delay: 1.2,
+          opacity: 0,
+          scale: 0.2 + Math.random() * 0.4,
+          duration: 0.5 + Math.random() * 0.4,
+          ease: "power2.out",
+        },
+        index * 0.2
+      );
+      t2.to(
+        bubble,
+        {
+          y: `+=${(index % 2 ? 1 : -1) * 20 + Math.random() * 10}`,
+          x: `+=${(index % 2 ? 1 : -1) * 10 + Math.random() * 10}`,
+          duration: 3 + Math.random() * 1,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        },
+        ">"
+      );
+      // Ball floating animation
+      // tl.to(
+      // bubble,
+      //   {
+      //     y: `+=${ballParams.floatDistance}`,
+      //     rotation: ballParams.rotation,
+      //     duration: ballParams.floatDuration,
+      //     repeat: -1,
+      //     yoyo: true,
+      //     ease: "sine.inOut",
+      //   },
+      //   ">"
+      // );
+    });
+  </script>
+</hero-section>

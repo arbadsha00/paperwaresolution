@@ -127,7 +127,7 @@ import ViewCanvas from "../components/ViewCanvas";
           ScrollTrigger.create({
             trigger: id, // Target the element with id
             start: "top center", // When the top of the element hits the center of the viewport
-            end: "bottom center", // When the bottom of the element leaves the center of the viewport
+            end: "bottom 40%", // When the bottom of the element leaves the center of the viewport
             // markers: true,
             onEnter: () => {
               gsap.to(bg_element, {
