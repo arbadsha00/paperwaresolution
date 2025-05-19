@@ -1,5 +1,5 @@
 ---
-import Green_Cup from "./Green_Cup.astro";
+import GreenCup from "./GreenCup";
 import StoryCard from "./StoryCard.astro";
 const stories = [
   {
@@ -43,11 +43,13 @@ const stories = [
     </p>
   </div>
 
-  <Green_Cup />
+  <div id="green-cup-container" class="size-[512px]">
+    <GreenCup client:only="react" />
+  </div>
 
   <section
     id="story-card-container"
-    class="flex flex-col items-center justify-center w-full gap-6"
+    class="flex flex-col items-center justify-center w-full gap-6 z-[31]"
   >
     {stories.map((story) => <StoryCard id={story.id} step={story.step} />)}
   </section>
@@ -57,7 +59,7 @@ const stories = [
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   const stories = document.getElementById("story-card-container");
-  const cup = document.getElementById("green-cup");
+  const cup = document.getElementById("green-cup-container");
   const timeln = gsap.timeline({ paused: true });
 
   timeln.fromTo(cup, { y: 0 }, { y: "100vh", duration: 1, ease: "none" }, 0);

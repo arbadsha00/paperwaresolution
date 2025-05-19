@@ -1,7 +1,7 @@
 ---
-import Recycle3d from "./Recycle3d.astro";
-import Reuse3D from "./Reuse3d.astro";
-import Refuse3D from "./Refuse3d.astro";
+import Reuse from "./Reuse";
+import Refuse from "./Refuse";
+import Recycle from "./Recycle";
 ---
 
 <section
@@ -25,15 +25,15 @@ import Refuse3D from "./Refuse3d.astro";
     class="flex flex-col lg:flex-row justify-center items-center gap-40 lg:gap-6"
   >
     <div
-      class="flex flex-col items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(0,218,73,0.3)_100%)] rounded-lg relative flex-1"
+      class="flex flex-col items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(0,218,73,0.2)_100%)] rounded-lg relative flex-1 shadow-lg"
     >
       <h1 class="text-2xl md:text-3xl font-black">RE-USE</h1>
       <p class="text-black/50 font-semibold text-sm md:text-base">
         We design durable, multifunctional paperware that encourages reuse,
         extending the life cycle of every product and reducing waste.
       </p>
-      <div class="w-[140px] md:w-[180px] absolute -top-[70%] right-10">
-        <Reuse3D />
+      <div class="size-[140px] md:size-[180px] absolute -top-[70%] right-10">
+        <Reuse client:only="react" />
       </div>
       <!-- <img
         src="/eco/reuse.png"
@@ -42,7 +42,7 @@ import Refuse3D from "./Refuse3d.astro";
       /> -->
     </div>
     <div
-      class="flex flex-col item-end lg:items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(218,0,0,0.3)_100%)] rounded-lg relative lg:mb-32 flex-1"
+      class="flex flex-col item-end lg:items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(218,0,0,0.2)_100%)] rounded-lg relative lg:mb-32 flex-1 shadow-lg"
     >
       <h1 class="text-2xl md:text-3xl font-black text-right lg:text-left">
         REFUSE
@@ -54,9 +54,9 @@ import Refuse3D from "./Refuse3d.astro";
         products are responsibly sourced and truly needed.
       </p>
       <div
-        class="w-[140px] md:w-[180px] absolute -top-[70%] left-10 lg:right-10 lg:left-auto"
+        class="size-[140px] md:size-[180px] absolute -top-[70%] left-10 lg:right-10 lg:left-auto"
       >
-        <Refuse3D />
+        <Refuse client:only="react" />
       </div>
       <!-- <img
         src="/eco/refuse.png"
@@ -65,7 +65,7 @@ import Refuse3D from "./Refuse3d.astro";
       /> -->
     </div>
     <div
-      class="flex flex-col items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(0,218,73,0.3)_100%)] rounded-lg relative flex-1"
+      class="flex flex-col items-start justify-between max-w-lg p-6 bg-[linear-gradient(135deg,rgba(255,255,255,0.46)_20%,rgba(0,218,73,0.2)_100%)] rounded-lg relative flex-1 shadow-lg"
     >
       <h1 class="text-2xl md:text-3xl font-black">RECYCLE</h1>
       <p class="text-black/50 font-semibold text-sm md:text-base">
@@ -73,8 +73,8 @@ import Refuse3D from "./Refuse3d.astro";
         materials, use recycled content when possible, and partner with local
         initiatives.
       </p>
-      <div class="w-[140px] md:w-[180px] absolute -top-[70%] right-10">
-        <Recycle3d />
+      <div class="size-[140px] md:size-[180px] absolute -top-[70%] right-10">
+        <Recycle client:only="react" />
       </div>
       <!-- <img
         src="/eco/recycle.png"
